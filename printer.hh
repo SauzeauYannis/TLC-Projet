@@ -3,6 +3,7 @@
 
 #include "visitor.hh"
 #include "code.hh"
+#include "pen.hh"
 #include "declaration.hh"
 #include "affectation.hh"
 #include "loop.hh"
@@ -13,8 +14,10 @@
 #include "position.hh"
 
 class Printer : public Visitor {
+	bool is_down = false;
  public:
 	void visitCode(const Code *c);
+	void visitPen(const Pen *p);
 	void visitDeclaration(const Declaration *d);
 	void visitAffectation(const Affectation *a);
 	void visitLoop(const Loop *l);

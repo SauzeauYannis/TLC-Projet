@@ -3,10 +3,9 @@
 
 #include "term.hh"
 
-class Instruction {
+class Instruction : public Term {
  public:
-	~Instruction() { }
-		    
+	~Instruction() { }  
 };
 
 #endif

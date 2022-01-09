@@ -1,6 +1,6 @@
 CXX=g++
-SRC=lex.yy.c parseur.tab.cc
-SRCH=
+SRC=code.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc
+SRCH=affectation.hh code.hh color.hh declaration.hh expression.hh instruction.hh loop.hh move.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh
 OBJ=$(SRC:.cc=.o)
 
 prog: $(OBJ)

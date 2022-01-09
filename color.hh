@@ -3,13 +3,15 @@
 
 #include "instruction.hh"
 
+#include <iostream>
+
 class Color : public Instruction {
-	string color;
+	std::string color;
  public:
-	Color(string color);
+	Color(std::string color);
 	~Color();
 
-	inline string getColor() const {return color;}
+	inline std::string getColor() const {return color;}
 
 	void visit(Visitor& visitor) const;
 };

@@ -2,6 +2,7 @@
 #define VISITOR_H
 
 class Code;
+class Pen;
 class Declaration;
 class Affectation;
 class Loop;
@@ -14,6 +15,7 @@ class Position;
 class Visitor {
  public:
 	virtual void visitCode(const Code *c) = 0;
+	virtual void visitPen(const Pen *p) = 0;
 	virtual void visitDeclaration(const Declaration *d) = 0;
 	virtual void visitAffectation(const Affectation *a) = 0;
 	virtual void visitLoop(const Loop *l) = 0;

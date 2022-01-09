@@ -10,8 +10,15 @@ void yyerror(const char* s) {
 
 %}
 
-%code requires{
-#include "printer.hh"
+%code requires {
+	#include "printer.hh"
+}
+
+%union {
+	char ident[255];
+	double value;
+  	Instruction* inst;
+  	Expression* expr;
 }
 
 %token DOWN UP
@@ -23,13 +30,15 @@ void yyerror(const char* s) {
 %token AFFECT
 %token SC
 %token LPAR RPAR COMMA
-%token NUM ID
+
+%token<ident> ID
+%token<value> NUM
+
+%type<inst> declaration code instruction affectation loop move color
+%type<expr> pos value op
 
 %left OPADD OPSUB
-%left OPMUL OPDIVi
-
-%type<instruction> declaration code instruction affectation loop move color
-%type<expression> pos value op 
+%left OPMUL OPDIV
 
 %start program
 
@@ -38,18 +47,22 @@ void yyerror(const char* s) {
 program: code { }
 ;
 
-code: code instruction SC { }
+code: code instruction SC {
+	Code *c = new Code($2);
+	c->add($1);
+	$$ = c;
+}
 | { }
 ;
 
 instruction: 
-  declaration { }
-| affectation { }
-| loop { }
-| move { }
-| color { }
-| DOWN { }
-| UP { }
+  declaration { $$ = $1; }
+| affectation { $$ = $1; }
+| loop 		  { $$ = $1; }
+| move 	      { $$ = $1; }
+| color 	  { $$ = $1; }
+| DOWN 		  { $$ = new Pen(true); }
+| UP 		  { $$ = new Pen(false); }
 ;
 
 declaration: VAR ID { }
@@ -87,10 +100,10 @@ pos: LPAR value COMMA value RPAR { }
 
 %%
 
-int main(int argc, char *argv[]){
+/* int main(int argc, char *argv[]){
     int res = yyparse();
 	std::cout << "RES=" << res << std::endl
 			  << "Le programme fourni respecte notre syntaxe ? " 
 			  << (res == 0 ? "Oui" : "Non") << std::endl;
 	return res == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
-}
+} */

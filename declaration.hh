@@ -3,17 +3,17 @@
 
 #include "instruction.hh"
 
+#include <iostream>
+
 class Decl : public Instruction {
-	string var;
+	std::string var;
  public:
-	Decl(string var);
+	Decl(std::string var);
 	~Decl();
 
-        inline const string getVar() const { return var; }
+    inline const std::string getVar() const { return var; }
 		  
 	void visit(Visitor& visitor) const;
-		    
 };
-
 
 #endif
