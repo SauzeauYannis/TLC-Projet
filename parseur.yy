@@ -20,6 +20,9 @@ void yyerror(const char* s) {
 %token LPAR RPAR COMMA
 %token NUM ID
 
+%left OPADD OPSUB
+%left OPMUL OPDIV
+
 %start program
 
 %%
@@ -61,6 +64,7 @@ color: COLOR COLOR_VAL { }
 
 value: NUM { }
 | ID { }
+| value op value { }
 | LPAR value op value RPAR { }
 ;
 
