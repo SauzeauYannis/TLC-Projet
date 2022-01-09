@@ -1,6 +1,7 @@
 %{
 
 #include <iostream>
+#include "printer.hh"
 
 extern int yylex();
 void yyerror(const char* s) {
@@ -8,6 +9,10 @@ void yyerror(const char* s) {
 }
 
 %}
+
+%code requires{
+#include "printer.hh"
+}
 
 %token DOWN UP
 %token MOVE LINE RECTANGLE
@@ -21,7 +26,10 @@ void yyerror(const char* s) {
 %token NUM ID
 
 %left OPADD OPSUB
-%left OPMUL OPDIV
+%left OPMUL OPDIVi
+
+%type<instruction> declaration code instruction affectation loop move color
+%type<expression> pos value op 
 
 %start program
 

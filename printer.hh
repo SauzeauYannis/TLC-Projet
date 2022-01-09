@@ -14,7 +14,7 @@
 
 class Printer : public Visitor {
  public:
-	void visitCode(const Float *f);
+	void visitCode(const Code *c);
 	void visitDeclaration(const Declaration *d);
 	void visitAffectation(const Affectation *a);
 	void visitLoop(const Loop *l);
