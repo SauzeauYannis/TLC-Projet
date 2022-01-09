@@ -1,6 +1,10 @@
 %{
-extern "C" int yylex();
-void yyeror(const char* s);
+#include <iostream>
+extern int yylex();
+void yyerror(const char* s){
+	std::cerr<<"ERREUR: " << s << std::endl;	
+}
+
 %}
 
 %token VAR
@@ -33,10 +37,10 @@ declaration: VAR ID SC
 
 affectation: ID AFFECT value SC;
 
-loop: FOR ID value value SC code END_LOOP SC;
+loop: LOOP ID value value SC code END_LOOP SC;
 
-vert_move: MOVE VALUE SC
-| RECTANGLE VALUE SC;
+vert_move: MOVE value SC
+| RECTANGLE value SC;
 
 horiz_move: DOWN SC
 | UP SC;
@@ -54,5 +58,10 @@ op : OPADD
 
 
 %%
+
+int main(int argc, char *argv[]){
+	yyparse();
+	return EXIT_SUCCESS;
+}
 
 
