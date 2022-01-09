@@ -6,12 +6,12 @@
 
 #include <iostream>
 
-class Affect : public Instruction {
+class Affectation : public Instruction {
 	std::string var;
 	Expression* expr;
  public:
-	Affect(std::string var, Expression* expr);
-	~Affect();
+	Affectation(std::string var, Expression* expr);
+	~Affectation();
 
 	inline std::string getVar() const { return var; }
 	inline const Expression* getExpr() const { return expr; }

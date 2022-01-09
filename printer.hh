@@ -7,7 +7,7 @@
 #include "declaration.hh"
 #include "affectation.hh"
 #include "loop.hh"
-#include "move.hh"
+#include "travel.hh"
 #include "color.hh"
 #include "value.hh"
 #include "operator.hh"
@@ -21,7 +21,7 @@ class Printer : public Visitor {
 	void visitDeclaration(const Declaration *d);
 	void visitAffectation(const Affectation *a);
 	void visitLoop(const Loop *l);
-	void visitMove(const Move *m);
+	void visitTravel(const Travel *m);
 	void visitColor(const Color *c);
 	void visitValue(const Value *v);
 	void visitOperator(const Operator *o);

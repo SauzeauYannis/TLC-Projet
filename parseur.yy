@@ -24,8 +24,8 @@ void yyerror(const char* s) {
 %token DOWN UP
 %token MOVE LINE RECTANGLE
 %token COLOR COLOR_VAL
-%token VAR
 %token OPADD OPSUB OPMUL OPDIV
+%token VAR
 %token LOOP END
 %token AFFECT
 %token SC
@@ -39,6 +39,7 @@ void yyerror(const char* s) {
 
 %left OPADD OPSUB
 %left OPMUL OPDIV
+
 
 %start program
 
@@ -65,8 +66,16 @@ instruction:
 | UP 		  { $$ = new Pen(false); }
 ;
 
-declaration: VAR ID { }
-| VAR affectation { }
+declaration: VAR ID {
+	Declaration *d = new Declaration($2);
+	free ($2);
+	$$ = d;	  
+ }
+| VAR ID AFFECT value {
+	Declaration *d = new Declaration($2);
+	Affectation *a = new Affectation($2, $4);
+	free($2);
+}
 ;
 
 affectation: ID AFFECT value { }

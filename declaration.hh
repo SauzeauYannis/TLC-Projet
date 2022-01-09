@@ -5,11 +5,11 @@
 
 #include <iostream>
 
-class Decl : public Instruction {
+class Declaration : public Instruction {
 	std::string var;
  public:
-	Decl(std::string var);
-	~Decl();
+	Declaration(std::string var);
+	~Declaration();
 
     inline const std::string getVar() const { return var; }
 		  

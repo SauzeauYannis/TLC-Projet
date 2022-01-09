@@ -32,7 +32,7 @@ void Printer::visitLoop(const Loop *l) {
     std::cout << "TODO" << std::endl;
 }
 
-void Printer::visitMove(const Move *m) {
+void Printer::visitTravel(const Travel *m) {
     std::cout << "TODO" << std::endl;
 }
 
