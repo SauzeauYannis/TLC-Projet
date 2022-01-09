@@ -12,10 +12,20 @@ lex.yy.c: lexeur.ll parseur.tab.cc
 parseur.tab.cc: parseur.yy
 	bison -d $<
 
+
+graph: graph.dot
+	dot -Tpng $< > $@.png
+
+graph.dot: parseur.yy
+	bison --graph=graph.dot parseur.yy
+
+all: prog graph
+
+
 .PHONY: clean
 
 clean: 
-	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh
+	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot
 
 quadrilatere: clean prog
 	./prog < quadrilatere

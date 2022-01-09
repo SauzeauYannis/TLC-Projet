@@ -77,6 +77,8 @@ pos: LPAR value COMMA value RPAR { }
 
 int main(int argc, char *argv[]){
     int res = yyparse();
-    printf("RES=%d\n", res);
-	return EXIT_SUCCESS;
+	std::cout << "RES=" << res << std::endl
+			  << "Le programme fourni respecte notre syntaxe ? " 
+			  << (res == 0 ? "Oui" : "Non") << std::endl;
+	return res == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
