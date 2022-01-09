@@ -19,3 +19,6 @@ clean:
 
 quadrilatere: clean prog
 	./prog < quadrilatere
+
+quadrillage: clean prog
+	./prog < quadrillage

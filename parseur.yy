@@ -48,7 +48,7 @@ declaration: VAR ID { }
 affectation: ID AFFECT value { }
 ;
 
-loop: LOOP ID value value SC code END LOOP SC { }
+loop: LOOP ID value value SC code END LOOP { }
 ;
 
 move: MOVE pos { }
