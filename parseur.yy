@@ -1,67 +1,82 @@
 %{
+
 #include <iostream>
+
 extern int yylex();
-void yyerror(const char* s){
-	std::cerr<<"ERREUR: " << s << std::endl;	
+void yyerror(const char* s) {
+	std::cerr << "ERREUR: " << s << std::endl;	
 }
 
 %}
 
-%token VAR
-%token LOOP END_LOOP
-%token ID INT
 %token DOWN UP
-%token MOVE RECTANGLE
-%token COLOR
+%token MOVE LINE RECTANGLE
+%token COLOR COLOR_VAL
+%token VAR
 %token OPADD OPSUB OPMUL OPDIV
-%token LPAR RPAR
+%token LOOP END
 %token AFFECT
 %token SC
+%token LPAR RPAR COMMA
+%token NUM ID
+
+%start program
 
 %%
 
-program:code;
+program: code { }
+;
 
-code: code instruction
-| ;
+code: code instruction SC { }
+| { }
+;
 
-instruction: declaration
-| affectation
-| loop 
-| vert_move
-| horiz_move
-| color;
+instruction: 
+  declaration { }
+| affectation { }
+| loop { }
+| move { }
+| color { }
+| DOWN { }
+| UP { }
+;
 
-declaration: VAR ID SC
-| VAR affectation;
+declaration: VAR ID { }
+| VAR affectation { }
+;
 
-affectation: ID AFFECT value SC;
+affectation: ID AFFECT value { }
+;
 
-loop: LOOP ID value value SC code END_LOOP SC;
+loop: LOOP ID value value SC code END LOOP SC { }
+;
 
-vert_move: MOVE value SC
-| RECTANGLE value SC;
+move: MOVE pos { }
+| LINE pos pos { }
+| RECTANGLE pos pos { }
+;
 
-horiz_move: DOWN SC
-| UP SC;
+color: COLOR COLOR_VAL { }
+;
 
-color: COLOR ID SC;
+value: NUM { }
+| ID { }
+| LPAR value op value RPAR { }
+;
 
-value: INT
-| ID
-| LPAR value op value RPAR;
+op : OPADD { }
+| OPSUB { }
+| OPMUL { }
+| OPDIV { }
+;
 
-op : OPADD
-| OPSUB
-| OPMUL
-| OPDIV;
-
+pos: LPAR value COMMA value RPAR { }
+;
 
 %%
 
 int main(int argc, char *argv[]){
-	yyparse();
+    int res = yyparse();
+    printf("RES=%d\n", res);
 	return EXIT_SUCCESS;
 }
-
-

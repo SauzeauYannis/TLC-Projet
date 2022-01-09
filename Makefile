@@ -1,9 +1,10 @@
-SRC=
+CXX=g++
+SRC=lex.yy.c parseur.tab.cc
 SRCH=
-OBJ=$(SRC:.c=.o)=
+OBJ=$(SRC:.cc=.o)
 
-prog: lex.yy.c parseur.tab.cc
-	g++ -o $@ $? -ll
+prog: $(OBJ)
+	$(CXX) -o $@ $(OBJ) -ll
 
 lex.yy.c: lexeur.ll parseur.tab.cc
 	flex $<
@@ -11,5 +12,10 @@ lex.yy.c: lexeur.ll parseur.tab.cc
 parseur.tab.cc: parseur.yy
 	bison -d $<
 
+.PHONY: clean
+
 clean: 
-	rm -fr lex.yy.c parseur.tab.cc parseur.tab.hh
+	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh
+
+quadrilatere: clean prog
+	./prog < quadrilatere

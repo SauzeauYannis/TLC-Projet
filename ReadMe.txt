@@ -1,0 +1,1 @@
+Fichier qui contiendra les commentaires sur notre projet et en particulier jusqu'à quel exercice on est allés.
