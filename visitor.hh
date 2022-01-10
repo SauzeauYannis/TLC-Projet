@@ -12,6 +12,8 @@ class Value;
 class Operator;
 class Position;
 class Var;
+class Rectangle;
+class Line;
 
 class Visitor {
  public:
@@ -26,6 +28,8 @@ class Visitor {
 	virtual void visitOperator(const Operator *o) = 0;
 	virtual void visitPosition(const Position *p) = 0;
 	virtual void visitVar(const Var *v) = 0;
+	virtual void visitRectangle(const Rectangle *r) = 0;
+	virtual void visitLine(const Line *l) = 0;
 };
 
 #endif
