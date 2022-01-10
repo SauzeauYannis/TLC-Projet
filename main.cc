@@ -9,12 +9,7 @@ int main(int argc, char **argv) {
 			  << "Le programme fourni respecte notre syntaxe ? " 
 			  << (res == 0 ? "Oui" : "Non") << std::endl;
   Printer printer;
-  if (fullinstruction != NULL) {
-    std::cout << "fi" << std::endl;
+  if (fullinstruction != NULL)
     fullinstruction->visit(printer);
-    std::cout << "fi visit" << std::endl;
-  } else {
-    std::cout << "fi null" << std::endl;
-  }
   return EXIT_SUCCESS;
 }

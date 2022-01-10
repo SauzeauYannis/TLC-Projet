@@ -8,17 +8,16 @@ void Printer::visitPen(const Pen *p) {
         std::cout << "Le stylo se baisse" << std::endl;;
     } else {
         is_down = false;
-        std::cout << "Le style se leve" << std::endl;;
+        std::cout << "Le stylo se leve" << std::endl;;
     }
 }
 
 void Printer::visitCode(const Code *c) {
-    std::cout << "Ouah" << std::endl;;
-    //CodeItem *t = c->getFirst();
-    // while (t != NULL) {
-    //     t->getInst()->visit(*this);
-    //     t = t->getNext();
-    // }
+    CodeItem *t = c->getFirst();
+    while (t != NULL) {
+        t->getInst()->visit(*this);
+        t = t->getNext();
+    }
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
