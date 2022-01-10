@@ -27,8 +27,13 @@ class Printer : public Visitor {
 	double buffer_expr;
 	std::pair<double, double> bufferPosition;
 	std::vector<std::string> protectedVar;
+	struct {
+		unsigned int r;
+		unsigned int g;
+		unsigned int b;
+	} rgb;
  public:
-	Printer() : is_down(false), vars{} {}
+	Printer() : is_down(false), vars{}, buffer_expr(0), bufferPosition(0, 0), protectedVar() {}
 	void visitCode(const Code *c);
 	void visitPen(const Pen *p);
 	void visitDeclaration(const Declaration *d);
