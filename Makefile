@@ -25,7 +25,7 @@ all: prog graph
 .PHONY: clean
 
 clean: 
-	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot
+	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot prog
 
 quadrilatere: clean prog
 	./prog < quadrilatere
