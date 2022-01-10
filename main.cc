@@ -1,7 +1,7 @@
 #include "parseur.tab.hh"
 #include "printer.hh"
 
-Instruction *fullinstruction = yylval.inst; // variable retenant le resultat final du parser... Mais tjrs NULL...
+extern Instruction *fullinstruction; // variable retenant le resultat final du parser...
 
 int main(int argc, char **argv) {
   int res = yyparse();

@@ -3,6 +3,8 @@
 #include <iostream>
 #include "printer.hh"
 
+Instruction *fullinstruction = NULL;
+
 extern int yylex();
 void yyerror(const char* s) {
 	std::cerr << "ERREUR: " << s << std::endl;	
@@ -44,7 +46,7 @@ void yyerror(const char* s) {
 
 %%
 
-program: code { }
+program: code { fullinstruction = $1; }
 ;
 
 code: code instruction SC {
