@@ -40,7 +40,7 @@ void Printer::visitDeclaration(const Declaration *d) {
 }
 
 void Printer::visitAffectation(const Affectation *a) {
-    if (vars.find(a->getVar()) != vars.end() && std::find(protectedVar.begin(), protectedVar.end(), a->getVar()) != protectedVar.end() ) {
+    if (vars.find(a->getVar()) != vars.end() && std::find(protectedVar.begin(), protectedVar.end(), a->getVar()) == protectedVar.end() ) {
         a->getExpr()->visit(*this);
         vars[a->getVar()] = buffer_expr;
         std::cout << "On met la valeur " << vars[a->getVar()] << " dans la variable " << a->getVar() << std::endl;
