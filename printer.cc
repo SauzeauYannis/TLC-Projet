@@ -55,13 +55,14 @@ void Printer::visitLoop(const Loop *l) {
     double min = buffer_expr;
     l->getMax()->visit(*this);
     double max = buffer_expr;
-    if(std::find(protectedVar.begin(), protectedVar.end(), l->getIncr()) != protectedVar.end() ){
-	protectedVar.push_back(l->getIncr());	    
-   	for(double i=min; i<= max; i++){
-        	vars[l->getIncr()] = i;	
-            	std::cout << l->getIncr() << " =  " << i << std::endl;
-    	}
-	protectedVar.pop_back();
+    if (std::find(protectedVar.begin(), protectedVar.end(), l->getIncr()) == protectedVar.end()) {
+        protectedVar.push_back(l->getIncr());	    
+        for (double i = min; i <= max; i++){
+            vars[l->getIncr()] = i;	
+            std::cout << l->getIncr() << " = " << i << std::endl;
+            l->getBody()->visit(*this);
+        }
+        protectedVar.pop_back();
     }
 }
 
@@ -108,7 +109,7 @@ void Printer::visitPosition(const Position *p) {
 	p->getY()->visit(*this);
 	double y = buffer_expr;	
 	bufferPosition = std::pair<double, double>(x, y);
-	std::cout << "Position[x,y] = [" << x << "," << y << "]" << std::endl;
+	std::cout << "Position = (" << x << ", " << y << ")" << std::endl;
 }
 
 void Printer::visitVar(const Var *v){
@@ -122,10 +123,10 @@ void Printer::visitRectangle(const Rectangle *r){
 	r->getOpposed()->visit(*this);
 	std::pair<double, double> opposed = bufferPosition;	
        
-	std::cout << "Rectangle : (" << start.first << "," << start.second <<") "<<
-		"(" << start.first << "," << opposed.second <<") " <<
-	 	"(" << opposed.first << "," << opposed.second <<") " <<
-		"(" << opposed.first << "," << start.second <<")" << std::endl;
+	std::cout << "Rectangle : (" << start.first << ", " << start.second <<") "<<
+		"(" << start.first << ", " << opposed.second <<") " <<
+	 	"(" << opposed.first << ", " << opposed.second <<") " <<
+		"(" << opposed.first << ", " << start.second <<")" << std::endl;
 }
 
 void Printer::visitLine(const Line *l) {
@@ -135,5 +136,5 @@ void Printer::visitLine(const Line *l) {
 	std::pair<double, double> end = bufferPosition;
 	
 	std::cout << "Ligne entre (" <<start.first << "," << start.second << ") et (" <<
-	       end.first << "," << end.second << ")" << std::endl;
+	       end.first << ", " << end.second << ")" << std::endl;
 }
