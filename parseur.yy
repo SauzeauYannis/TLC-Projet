@@ -18,7 +18,7 @@ void yyerror(const char* s) {
 
 %union {
 	char ident[255];
-	double value;
+	int value;
   	Instruction* inst;
   	Expression* expr;
 }
@@ -58,11 +58,11 @@ code: code instruction SC {
 ;
 
 instruction: 
-  declaration { $$=$1; }
-| affectation { $$=$1; }
-| loop 		  { $$=$1; }
-| move 	      { $$=$1; }
-| color 	  { $$=$1; }
+  declaration { $$ = $1; }
+| affectation { $$ = $1; }
+| loop 		  { $$ = $1; }
+| move 	      { $$ = $1; }
+| color 	  { $$ = $1; }
 | DOWN 		  { $$ = new Pen(true); }
 | UP 		  { $$ = new Pen(false); }
 ;
@@ -73,18 +73,16 @@ declaration: VAR ID AFFECT value {
 	Code *code = new Code(d);
 	code->add(a);
 	$$ = code;
-	free($2);	  
- }
+}
 | VAR ID {
 	Declaration *d = new Declaration($2);
-	free($2);
 	$$ = d;
 }
 ;
 
 affectation: ID AFFECT value {
 	$$ = new Affectation( $1, $3);	  
- }
+}
 ;
 
 loop: LOOP ID value value SC code END LOOP { $$ = new Loop($2, $3, $4, $6); }

@@ -14,9 +14,13 @@
 #include "position.hh"
 #include "var.hh"
 
+#include <unordered_map>
+
 class Printer : public Visitor {
-	bool is_down = false;
+	bool is_down;
+	std::unordered_map<std::string, int> vars;
  public:
+	Printer() : is_down(false), vars{} {}
 	void visitCode(const Code *c);
 	void visitPen(const Pen *p);
 	void visitDeclaration(const Declaration *d);

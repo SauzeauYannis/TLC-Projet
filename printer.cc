@@ -4,11 +4,19 @@
 
 void Printer::visitPen(const Pen *p) {
     if (p->getIsDown()) {
-        is_down = true;
-        std::cout << "Le stylo se baisse" << std::endl;;
+        if (is_down) {
+            std::cout << "Le stylo est deja baisser" << std::endl;;
+        } else {
+            is_down = true;
+            std::cout << "Le stylo se baisse" << std::endl;;
+        }
     } else {
-        is_down = false;
-        std::cout << "Le stylo se leve" << std::endl;;
+        if (!is_down) {
+            std::cout << "Le stylo est deja lever" << std::endl;;
+        } else {
+            is_down = false;
+            std::cout << "Le stylo se leve" << std::endl;;
+        }
     }
 }
 
@@ -21,7 +29,11 @@ void Printer::visitCode(const Code *c) {
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
-    std::cout << "TODO" << std::endl;
+    vars[d->getVar()] = 0;    
+    for( const auto& n : vars) {
+        std::cout << "Key:[" << n.first << "] Value:[" << n.second << "]\n";
+    }
+    std::cout << "On declare une nouvelle variable nomme " << d->getVar() << std::endl;
 }
 
 void Printer::visitAffectation(const Affectation *a) {
