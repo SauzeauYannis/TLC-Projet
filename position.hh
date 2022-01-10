@@ -4,14 +4,14 @@
 #include "expression.hh"
 
 class Position : public Expression {
-	double x;
-	double y;
+	Expression *x;
+	Expression *y;
  public:
-	Position(double x, double y);
+	Position(Expression *x,Expression *y);
 	~Position();
 
-	inline double getX() const {return x;}
-	inline double getY() const {return y;}
+	inline Expression* getX() const {return x;}
+	inline Expression* getY() const {return y;}
 
 	void visit(Visitor& visitor) const;
 };

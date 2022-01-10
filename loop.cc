@@ -1,10 +1,13 @@
 #include "loop.hh"
 
-Loop::Loop(Instruction *instr) : body(instr){
-
+Loop::Loop(std::string incr, Expression* min, Expression* max, Instruction *instr) :
+       incr(incr), min(min), max(max), body(instr)
+{
 }
 
 Loop::~Loop(){
+	delete(max);
+	delete(min);
 	delete(body);
 }
 

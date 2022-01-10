@@ -1,6 +1,6 @@
 #include "position.hh"
 
-Position::Position(double x, double y): x(x), y(y){
+Position::Position(Expression *x, Expression *y): x(x), y(y){
 
 }
 

@@ -2,15 +2,15 @@
 #define _TRAVEL_H
 
 #include "instruction.hh"
-#include "position.hh"
+#include "expression.hh"
 
 class Travel : public Instruction {
-	Position* pos;
+	Expression* pos;
 public:
-	Travel(Position* pos);
+	Travel(Expression* pos);
 	~Travel();
 
-	inline const Position* getPosition() const {return pos;}
+	inline const Expression* getPosition() const {return pos;}
 
 	void visit(Visitor& visitor) const;
 

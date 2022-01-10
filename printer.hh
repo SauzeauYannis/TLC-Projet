@@ -12,6 +12,7 @@
 #include "value.hh"
 #include "operator.hh"
 #include "position.hh"
+#include "var.hh"
 
 class Printer : public Visitor {
 	bool is_down = false;
@@ -26,6 +27,7 @@ class Printer : public Visitor {
 	void visitValue(const Value *v);
 	void visitOperator(const Operator *o);
 	void visitPosition(const Position *p);
+	void visitVar(const Var *v);
 };
 
 #endif

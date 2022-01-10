@@ -52,3 +52,7 @@ void Printer::visitOperator(const Operator *o) {
 void Printer::visitPosition(const Position *p) {
     std::cout << "TODO" << std::endl;
 }
+
+void Printer::visitVar(const Var *v){
+    std::cout << "TODO" << std::endl;
+}

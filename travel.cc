@@ -1,5 +1,5 @@
 #include "travel.hh"
-Travel::Travel(Position *pos): pos(pos){
+Travel::Travel(Expression *pos): pos(pos){
 
 }
 
