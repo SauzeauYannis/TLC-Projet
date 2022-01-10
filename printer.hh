@@ -19,6 +19,7 @@
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
+#include <cstring>
 
 class Printer : public Visitor {
 	bool is_down;

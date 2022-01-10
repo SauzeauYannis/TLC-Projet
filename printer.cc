@@ -72,8 +72,12 @@ void Printer::visitTravel(const Travel *m) {
 
 void Printer::visitColor(const Color *c) {
     int r, g, b;
-    sscanf((char*)c->getColor().substr(1), "%02x%02x%02x", &r, &g, &b);
+    std::string colorHex = c->getColor().substr(1);
+    char* cstr = new char[colorHex.length()+1];
+    std::strcpy (cstr, colorHex.c_str());
+    sscanf(cstr, "%02x%02x%02x", &r, &g, &b);
     std::cout << "On change la couleur en (" << r << ", " << g << ", " << b << ")" << std::endl;
+    free(cstr);
 }
 
 void Printer::visitValue(const Value *v) {
