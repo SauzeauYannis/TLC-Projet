@@ -37,15 +37,32 @@ void Printer::visitDeclaration(const Declaration *d) {
 }
 
 void Printer::visitAffectation(const Affectation *a) {
-    std::cout << "TODO" << std::endl;
+
+// coment récupéré la valeur d'une expression ?
+	if(vars.contains(a->getVar())){
+		a->getExpr()->visit(*this);
+		vars[a->getVar()] = (int)bufferNUM;
+    
+		std::cout << "La variable " <<a->getVar() << " vaut "<< bufferNUM << std::endl;
+	}
 }
 
 void Printer::visitLoop(const Loop *l) {
-    std::cout << "TODO" << std::endl;
+	if(vars.contains->getIncr()){
+		l->getMin()->visit(*this);
+		double min = bufferNUM;
+		l->getMax()->visit(*this);
+		double max = bufferNUM;
+		for(double i=min; i<= max; i++){
+			vars[l->getIncr()] = i;	
+    			std::cout << l->getIncr() << " =  " << i << std::endl;
+		}
+	}
 }
 
 void Printer::visitTravel(const Travel *m) {
-    std::cout << "TODO" << std::endl;
+		
+       	std::cout << "TODO" << std::endl;
 }
 
 void Printer::visitColor(const Color *c) {
@@ -53,15 +70,32 @@ void Printer::visitColor(const Color *c) {
 }
 
 void Printer::visitValue(const Value *v) {
-    std::cout << "TODO" << std::endl;
+   	bufferNUM = v->getValue();
+       	std::cout << "Valeur : " << v->getValue() << std::endl;
 }
 
 void Printer::visitOperator(const Operator *o) {
-    std::cout << "TODO" << std::endl;
+	o->getLeft()->visit(*this);
+	double left = bufferNUM;
+	o->getRight()->visit(*this);
+	double right = bufferNUM;
+	switch(o->getSymbol()){
+		case ADD: bufferNUM = left + right; break;
+		case SUB: bufferNUM = left - right; break;
+		case MUL: bufferNUM = left * right; break;
+		case DIV: bufferNUM = left / right; break;
+		default :
+	}
+	std::cout << "Operation = " << bufferNUM  << std::endl;
 }
 
 void Printer::visitPosition(const Position *p) {
-    std::cout << "TODO" << std::endl;
+	p->getX()->visit(*this);
+     	double x = bufferNUM;
+	p->getY()->visit(*this);
+	double y = bufferNUM;	
+	bufferPosition = std::pair<double, double>(x, y);
+	std::cout << "Position[x,y] = [" << x << "," << y << "]" << std::endl;
 }
 
 void Printer::visitVar(const Var *v){

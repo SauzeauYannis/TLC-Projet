@@ -19,6 +19,9 @@
 class Printer : public Visitor {
 	bool is_down;
 	std::unordered_map<std::string, int> vars;
+	double bufferNUM;
+	std::pair<double, double> bufferPosition;
+
  public:
 	Printer() : is_down(false), vars{} {}
 	void visitCode(const Code *c);
