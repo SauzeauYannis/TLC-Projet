@@ -18,8 +18,8 @@
 
 class Printer : public Visitor {
 	bool is_down;
-	std::unordered_map<std::string, int> vars;
-	double bufferNUM;
+	std::unordered_map<std::string, float> vars;
+	double buffer_expr;
 	std::pair<double, double> bufferPosition;
 
  public:

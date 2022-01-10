@@ -18,7 +18,7 @@ void yyerror(const char* s) {
 
 %union {
 	char ident[255];
-	int value;
+	double value;
   	Instruction* inst;
   	Expression* expr;
 }
@@ -96,8 +96,8 @@ move: MOVE pos { $$ = new Travel($2); }
 color: COLOR COLOR_VAL { }
 ;
 
-value: NUM { $$=new Value($1);}
-| ID { $$ = new Var($1); free($1); }
+value: NUM 			{ $$ = new Value($1);}
+| ID 				{ $$ = new Var($1); }
 | value OPADD value { $$ = new Operator(ADD, $1, $3);}
 | value OPSUB value { $$ = new Operator(SUB, $1, $3);}
 | value OPMUL value { $$ = new Operator(MUL, $1, $3);}

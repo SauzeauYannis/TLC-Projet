@@ -34,7 +34,7 @@ fin    { return END; }
 ")" { return RPAR; }
 "," { return COMMA; }
 
-[0-9]+                { yylval.value = atoi(yytext); return NUM; }
+[0-9]+[.]?[0-9]*      { yylval.value = atof(yytext); return NUM; }
 [a-zA-Z][a-zA-Z0-9_]* { strcpy(yylval.ident, yytext); return ID; }
 
 .|\n {}

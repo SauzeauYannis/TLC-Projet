@@ -29,40 +29,39 @@ void Printer::visitCode(const Code *c) {
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
-    vars[d->getVar()] = 0;    
-    for( const auto& n : vars) {
-        std::cout << "Key:[" << n.first << "] Value:[" << n.second << "]\n";
+    if (vars.find(d->getVar()) == vars.end()) {
+        vars[d->getVar()] = 0;    
+        std::cout << "On declare une nouvelle variable nomme " << d->getVar() << std::endl;
+    } else {
+        std::cerr << "[ERREUR] La variable " << d->getVar() << " est deja declare" << std::endl;
+        exit(EXIT_FAILURE);
     }
-    std::cout << "On declare une nouvelle variable nomme " << d->getVar() << std::endl;
 }
 
 void Printer::visitAffectation(const Affectation *a) {
-
-// coment récupéré la valeur d'une expression ?
-	if(vars.contains(a->getVar())){
-		a->getExpr()->visit(*this);
-		vars[a->getVar()] = (int)bufferNUM;
-    
-		std::cout << "La variable " <<a->getVar() << " vaut "<< bufferNUM << std::endl;
-	}
+    if (vars.find(a->getVar()) != vars.end()) {
+        a->getExpr()->visit(*this);
+        vars[a->getVar()] = buffer_expr;
+        std::cout << "On met la valeur " << vars[a->getVar()] << " dans la variable " << a->getVar() << std::endl;
+    } else {
+        std::cerr << "[ERREUR] La variable " << a->getVar() << " n'existe pas" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 void Printer::visitLoop(const Loop *l) {
-	if(vars.contains->getIncr()){
-		l->getMin()->visit(*this);
-		double min = bufferNUM;
-		l->getMax()->visit(*this);
-		double max = bufferNUM;
-		for(double i=min; i<= max; i++){
-			vars[l->getIncr()] = i;	
-    			std::cout << l->getIncr() << " =  " << i << std::endl;
-		}
-	}
+    l->getMin()->visit(*this);
+    double min = buffer_expr;
+    l->getMax()->visit(*this);
+    double max = buffer_expr;
+    for(double i=min; i<= max; i++){
+        vars[l->getIncr()] = i;	
+            std::cout << l->getIncr() << " =  " << i << std::endl;
+    }
 }
 
 void Printer::visitTravel(const Travel *m) {
-		
-       	std::cout << "TODO" << std::endl;
+	std::cout << "TODO" << std::endl;
 }
 
 void Printer::visitColor(const Color *c) {
@@ -70,34 +69,34 @@ void Printer::visitColor(const Color *c) {
 }
 
 void Printer::visitValue(const Value *v) {
-   	bufferNUM = v->getValue();
-       	std::cout << "Valeur : " << v->getValue() << std::endl;
+   	buffer_expr = v->getValue();
+    std::cout << "On recupere une valeur egale a " << v->getValue() << std::endl;
 }
 
 void Printer::visitOperator(const Operator *o) {
 	o->getLeft()->visit(*this);
-	double left = bufferNUM;
+	double left = buffer_expr;
 	o->getRight()->visit(*this);
-	double right = bufferNUM;
-	switch(o->getSymbol()){
-		case ADD: bufferNUM = left + right; break;
-		case SUB: bufferNUM = left - right; break;
-		case MUL: bufferNUM = left * right; break;
-		case DIV: bufferNUM = left / right; break;
-		default :
+	double right = buffer_expr;
+	switch (o->getSymbol()) {
+		case ADD: buffer_expr = left + right; break;
+		case SUB: buffer_expr = left - right; break;
+		case MUL: buffer_expr = left * right; break;
+		case DIV: buffer_expr = left / right; break;
 	}
-	std::cout << "Operation = " << bufferNUM  << std::endl;
+	std::cout << "Operation = " << buffer_expr  << std::endl;
 }
 
 void Printer::visitPosition(const Position *p) {
 	p->getX()->visit(*this);
-     	double x = bufferNUM;
+     	double x = buffer_expr;
 	p->getY()->visit(*this);
-	double y = bufferNUM;	
+	double y = buffer_expr;	
 	bufferPosition = std::pair<double, double>(x, y);
 	std::cout << "Position[x,y] = [" << x << "," << y << "]" << std::endl;
 }
 
 void Printer::visitVar(const Var *v){
-    std::cout << "TODO" << std::endl;
+   	buffer_expr = vars[v->getIdent()];
+    std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
 }

@@ -21,14 +21,16 @@ graph.dot: parseur.yy
 
 all: prog graph
 
-
-.PHONY: clean
-
-clean: 
-	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot prog
+test: clean prog
+	./prog < test
 
 quadrilatere: clean prog
 	./prog < quadrilatere
 
 quadrillage: clean prog
 	./prog < quadrillage
+
+.PHONY: clean
+
+clean: 
+	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot prog

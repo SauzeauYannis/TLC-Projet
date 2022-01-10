@@ -1,10 +1,10 @@
 baisser;
 var a;
+a <- 5;
 baisser;
 lever;
 baisser;
 lever;
 var b;
 lever;
-var c;
-var c;
+var c <- 10;
