@@ -12,3 +12,5 @@ b <- a;
 var d <- 5 + 2.5;
 var e <- d * 5 / 2;
 deplacer (d, e);
+ligne (1, 2) (3, 4);
+rect (a, b) (c, d);

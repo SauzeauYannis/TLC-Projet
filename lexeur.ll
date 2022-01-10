@@ -13,8 +13,8 @@ deplacer { return MOVE; }
 ligne    { return LINE; }
 rect     { return RECTANGLE; }
 
-couleur        { return COLOR; }
-[a-fA-F0-9]{6} { return COLOR_VAL; }
+couleur         { return COLOR; }
+#[a-fA-F0-9]{6} { strcpy(yylval.color, yytext); return COLOR_VAL; }
 
 var { return VAR; }
 

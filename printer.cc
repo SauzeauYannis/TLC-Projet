@@ -1,6 +1,7 @@
 #include "printer.hh"
 
 #include <iostream>
+#include <string>
 
 void Printer::visitPen(const Pen *p) {
     if (p->getIsDown()) {
@@ -62,10 +63,14 @@ void Printer::visitLoop(const Loop *l) {
 
 void Printer::visitTravel(const Travel *m) {
 	m->getPosition()->visit(*this);
+    std::cout << "On bouge en (" << bufferPosition.first << ", " << bufferPosition.second << ")" << std::endl;
 }
 
 void Printer::visitColor(const Color *c) {
-    std::cout << "TODO" << std::endl;
+    std::string color
+    int r, g, b;
+    sscanf(const_cast<char*>(c->getColor().substr(1)), "%02x%02x%02x", &r, &g, &b);
+    std::cout << "On change la couleur en (" << r << ", " << g << ", " << b << ")" << std::endl;
 }
 
 void Printer::visitValue(const Value *v) {
@@ -107,7 +112,7 @@ void Printer::visitVar(const Var *v){
 
 void Printer::visitRectangle(const Rectangle *r){
 	r->getStart()->visit(*this);
-       	std::pair<double, double> start = bufferPosition;
+    std::pair<double, double> start = bufferPosition;
 	r->getOpposed()->visit(*this);
 	std::pair<double, double> opposed = bufferPosition;	
        
@@ -123,6 +128,6 @@ void Printer::visitLine(const Line *l) {
 	l->getEnd()->visit(*this);
 	std::pair<double, double> end = bufferPosition;
 	
-	std::cout << "Line between (" <<start.first << "," << start.second << ") et (" <<
+	std::cout << "Ligne entre (" <<start.first << "," << start.second << ") et (" <<
 	       end.first << "," << end.second << ")" << std::endl;
 }
