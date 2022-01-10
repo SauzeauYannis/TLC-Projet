@@ -3,6 +3,8 @@
 #include <iostream>
 #include "printer.hh"
 
+Instruction *fullinstruction = NULL;
+
 extern int yylex();
 void yyerror(const char* s) {
 	std::cerr << "ERREUR: " << s << std::endl;	
@@ -44,12 +46,12 @@ void yyerror(const char* s) {
 
 %%
 
-program: code { }
+program: code { fullinstruction = $1; }
 ;
 
 code: code instruction SC {
-	Code *c = new Code($2);
-	c->add($1);
+	Code *c = new Code($1);
+	c->add($2);
 	$$ = c;
 }
 | { }
@@ -108,11 +110,3 @@ pos: LPAR value COMMA value RPAR {$$ = new Position($2,$4); }
 ;
 
 %%
-
-/* int main(int argc, char *argv[]){
-    int res = yyparse();
-	std::cout << "RES=" << res << std::endl
-			  << "Le programme fourni respecte notre syntaxe ? " 
-			  << (res == 0 ? "Oui" : "Non") << std::endl;
-	return res == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
-} */

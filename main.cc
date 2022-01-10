@@ -1,7 +1,7 @@
 #include "parseur.tab.hh"
 #include "printer.hh"
 
-Instruction *fullinstruction = yylval.inst; // variable retenant le resultat final du parser... Mais tjrs NULL...
+extern Instruction *fullinstruction; // variable retenant le resultat final du parser...
 
 int main(int argc, char **argv) {
   int res = yyparse();
@@ -9,12 +9,7 @@ int main(int argc, char **argv) {
 			  << "Le programme fourni respecte notre syntaxe ? " 
 			  << (res == 0 ? "Oui" : "Non") << std::endl;
   Printer printer;
-  if (fullinstruction != NULL) {
-    std::cout << "fi" << std::endl;
+  if (fullinstruction != NULL)
     fullinstruction->visit(printer);
-    std::cout << "fi visit" << std::endl;
-  } else {
-    std::cout << "fi null" << std::endl;
-  }
   return EXIT_SUCCESS;
 }
