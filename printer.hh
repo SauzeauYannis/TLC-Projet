@@ -17,13 +17,15 @@
 #include "line.hh"
 
 #include <unordered_map>
+#include <vector>
+#include <algorithm>
 
 class Printer : public Visitor {
 	bool is_down;
 	std::unordered_map<std::string, float> vars;
 	double buffer_expr;
 	std::pair<double, double> bufferPosition;
-
+	std::vector<std::string> protectedVar;
  public:
 	Printer() : is_down(false), vars{} {}
 	void visitCode(const Code *c);
