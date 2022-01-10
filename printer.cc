@@ -13,11 +13,12 @@ void Printer::visitPen(const Pen *p) {
 }
 
 void Printer::visitCode(const Code *c) {
-    CodeItem *t = c->getFirst();
-    while (t != NULL) {
-        t->getInst()->visit(*this);
-        t = t->getNext();
-    }
+    std::cout << "Ouah" << std::endl;;
+    //CodeItem *t = c->getFirst();
+    // while (t != NULL) {
+    //     t->getInst()->visit(*this);
+    //     t = t->getNext();
+    // }
 }
 
 void Printer::visitDeclaration(const Declaration *d) {

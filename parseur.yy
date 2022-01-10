@@ -18,10 +18,9 @@ void yyerror(const char* s) {
 	char ident[255];
 	double value;
   	Instruction* inst;
-  	Expression* expr;
+  	//Expression* expr;
 }
 
-%token DOWN UP
 %token MOVE LINE RECTANGLE
 %token COLOR COLOR_VAL
 %token OPADD OPSUB OPMUL OPDIV
@@ -33,13 +32,13 @@ void yyerror(const char* s) {
 
 %token<ident> ID
 %token<value> NUM
+%token<inst> DOWN UP
 
-%type<inst> declaration code instruction affectation loop move color
-%type<expr> pos value op
+%type<inst> code instruction //declaration affectation loop move color
+//%type<expr> pos value op
 
 %left OPADD OPSUB
 %left OPMUL OPDIV
-
 
 %start program
 
@@ -57,25 +56,17 @@ code: code instruction SC {
 ;
 
 instruction: 
-  declaration { $$ = $1; }
-| affectation { $$ = $1; }
-| loop 		  { $$ = $1; }
-| move 	      { $$ = $1; }
-| color 	  { $$ = $1; }
+  declaration { }
+| affectation { }
+| loop 		  { }
+| move 	      { }
+| color 	  { }
 | DOWN 		  { $$ = new Pen(true); }
 | UP 		  { $$ = new Pen(false); }
 ;
 
-declaration: VAR ID {
-	Declaration *d = new Declaration($2);
-	free ($2);
-	$$ = d;	  
- }
-| VAR ID AFFECT value {
-	Declaration *d = new Declaration($2);
-	Affectation *a = new Affectation($2, $4);
-	free($2);
-}
+declaration: VAR ID { }
+| VAR ID AFFECT value { }
 ;
 
 affectation: ID AFFECT value { }
