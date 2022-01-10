@@ -40,7 +40,7 @@ void Printer::visitDeclaration(const Declaration *d) {
 }
 
 void Printer::visitAffectation(const Affectation *a) {
-    if (vars.find(a->getVar()) != vars.end()) {
+    if (vars.find(a->getVar()) != vars.end() && std::find(protectedVar.begin(), protectedVar.end(), a->getVar()) == protectedVar.end() ) {
         a->getExpr()->visit(*this);
         vars[a->getVar()] = buffer_expr;
         std::cout << "On met la valeur " << vars[a->getVar()] << " dans la variable " << a->getVar() << std::endl;
@@ -55,9 +55,13 @@ void Printer::visitLoop(const Loop *l) {
     double min = buffer_expr;
     l->getMax()->visit(*this);
     double max = buffer_expr;
-    for(double i=min; i<= max; i++){
-        vars[l->getIncr()] = i;	
-            std::cout << l->getIncr() << " =  " << i << std::endl;
+    if(std::find(protectedVar.begin(), protectedVar.end(), l->getIncr()) != protectedVar.end() ){
+	protectedVar.push_back(l->getIncr());	    
+   	for(double i=min; i<= max; i++){
+        	vars[l->getIncr()] = i;	
+            	std::cout << l->getIncr() << " =  " << i << std::endl;
+    	}
+	protectedVar.pop_back();
     }
 }
 
@@ -67,10 +71,13 @@ void Printer::visitTravel(const Travel *m) {
 }
 
 void Printer::visitColor(const Color *c) {
-    std::string color
     int r, g, b;
-    sscanf(const_cast<char*>(c->getColor().substr(1)), "%02x%02x%02x", &r, &g, &b);
+    std::string colorHex = c->getColor().substr(1);
+    char* cstr = new char[colorHex.length()+1];
+    std::strcpy (cstr, colorHex.c_str());
+    sscanf(cstr, "%02x%02x%02x", &r, &g, &b);
     std::cout << "On change la couleur en (" << r << ", " << g << ", " << b << ")" << std::endl;
+    free(cstr);
 }
 
 void Printer::visitValue(const Value *v) {
