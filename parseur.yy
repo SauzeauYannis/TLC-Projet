@@ -50,8 +50,8 @@ program: code { fullinstruction = $1; }
 ;
 
 code: code instruction SC {
-	Code *c = new Code($2);
-	c->add($1);
+	Code *c = new Code($1);
+	c->add($2);
 	$$ = c;
 }
 | { }
