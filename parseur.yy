@@ -18,13 +18,14 @@ void yyerror(const char* s) {
 
 %union {
 	char ident[255];
+	char color[7];
 	double value;
   	Instruction* inst;
   	Expression* expr;
 }
 
 %token MOVE LINE RECTANGLE
-%token COLOR COLOR_VAL
+%token COLOR
 %token OPADD OPSUB OPMUL OPDIV
 %token VAR
 %token LOOP END
@@ -34,6 +35,7 @@ void yyerror(const char* s) {
 
 %token<ident> ID
 %token<value> NUM
+%token<color> COLOR_VAL
 %token<inst> DOWN UP
 
 %type<inst> code instruction declaration affectation loop move color
@@ -93,7 +95,7 @@ move: MOVE pos { $$ = new Travel($2); }
 | RECTANGLE pos pos { $$ = new Rectangle($2, $3); }
 ;
 
-color: COLOR COLOR_VAL { }
+color: COLOR COLOR_VAL { $$ = new Color($2); }
 ;
 
 value: NUM 			{ $$ = new Value($1);}
