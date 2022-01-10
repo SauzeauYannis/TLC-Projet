@@ -100,3 +100,11 @@ void Printer::visitVar(const Var *v){
    	buffer_expr = vars[v->getIdent()];
     std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
 }
+
+void visitRectangle(const Rectangle *r){
+    std::cout << "TODO" << std::endl;
+}
+
+void visitLine(const Line *l) {
+    std::cout << "TODO" << std::endl;
+}

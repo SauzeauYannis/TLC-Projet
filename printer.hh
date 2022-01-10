@@ -35,6 +35,8 @@ class Printer : public Visitor {
 	void visitOperator(const Operator *o);
 	void visitPosition(const Position *p);
 	void visitVar(const Var *v);
+	void visitRectangle(const Rectangle *r);
+	void visitLine(const Line *l);
 };
 
 #endif

@@ -1,5 +1,5 @@
-SRC=code.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc affectation.cc declaration.cc color.cc loop.cc travel.cc operator.cc position.cc value.cc var.cc 
-SRCH=affectation.hh code.hh color.hh declaration.hh expression.hh instruction.hh loop.hh travel.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh var.hh
+SRC=code.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc affectation.cc declaration.cc color.cc loop.cc travel.cc operator.cc position.cc value.cc var.cc rectangle.cc line.cc
+SRCH=affectation.hh code.hh color.hh declaration.hh expression.hh instruction.hh loop.hh travel.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh var.hh rectangle.hh line.hh
 CXX=g++
 OBJ=$(SRC:.cc=.o)
 
