@@ -8,3 +8,7 @@ lever;
 var b;
 lever;
 var c <- 10;
+b <- a;
+var d <- 5 + 2.5;
+var e <- d * 5 / 2;
+deplacer (d, e);

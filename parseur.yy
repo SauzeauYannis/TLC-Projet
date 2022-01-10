@@ -104,7 +104,7 @@ value: NUM 			{ $$ = new Value($1);}
 | value OPDIV value { $$ = new Operator(DIV, $1, $3);}
 ;
 
-pos: LPAR value COMMA value RPAR {$$ = new Position($2,$4); }
+pos: LPAR value COMMA value RPAR { $$ = new Position($2, $4); }
 ;
 
 %%

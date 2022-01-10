@@ -61,7 +61,7 @@ void Printer::visitLoop(const Loop *l) {
 }
 
 void Printer::visitTravel(const Travel *m) {
-	std::cout << "TODO" << std::endl;
+	m->getPosition()->visit(*this);
 }
 
 void Printer::visitColor(const Color *c) {
@@ -83,13 +83,17 @@ void Printer::visitOperator(const Operator *o) {
 		case SUB: buffer_expr = left - right; break;
 		case MUL: buffer_expr = left * right; break;
 		case DIV: buffer_expr = left / right; break;
+        default: {
+            std::cerr << "[ERREUR] L'operateur " << o->getSymbol() << " n'existe pas" << std::endl;
+            exit(EXIT_FAILURE);
+        }
 	}
 	std::cout << "Operation = " << buffer_expr  << std::endl;
 }
 
 void Printer::visitPosition(const Position *p) {
 	p->getX()->visit(*this);
-     	double x = buffer_expr;
+    double x = buffer_expr;
 	p->getY()->visit(*this);
 	double y = buffer_expr;	
 	bufferPosition = std::pair<double, double>(x, y);
