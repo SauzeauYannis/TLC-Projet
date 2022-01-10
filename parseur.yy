@@ -98,12 +98,12 @@ move: MOVE pos { $$ = new Travel($2); }
 color: COLOR COLOR_VAL { $$ = new Color($2); }
 ;
 
-value: NUM 			{ $$ = new Value($1);}
+value: NUM 			{ $$ = new Value($1); }
 | ID 				{ $$ = new Var($1); }
-| value OPADD value { $$ = new Operator(ADD, $1, $3);}
-| value OPSUB value { $$ = new Operator(SUB, $1, $3);}
-| value OPMUL value { $$ = new Operator(MUL, $1, $3);}
-| value OPDIV value { $$ = new Operator(DIV, $1, $3);}
+| value OPADD value { $$ = new Operator(ADD, $1, $3); }
+| value OPSUB value { $$ = new Operator(SUB, $1, $3); }
+| value OPMUL value { $$ = new Operator(MUL, $1, $3); }
+| value OPDIV value { $$ = new Operator(DIV, $1, $3); }
 ;
 
 pos: LPAR value COMMA value RPAR { $$ = new Position($2, $4); }
