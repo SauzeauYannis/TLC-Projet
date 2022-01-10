@@ -13,6 +13,8 @@
 #include "operator.hh"
 #include "position.hh"
 #include "var.hh"
+#include "rectangle.hh"
+#include "line.hh"
 
 #include <unordered_map>
 

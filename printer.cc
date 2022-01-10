@@ -101,10 +101,10 @@ void Printer::visitVar(const Var *v){
     std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
 }
 
-void visitRectangle(const Rectangle *r){
+void Printer::visitRectangle(const Rectangle *r){
     std::cout << "TODO" << std::endl;
 }
 
-void visitLine(const Line *l) {
+void Printer::visitLine(const Line *l) {
     std::cout << "TODO" << std::endl;
 }

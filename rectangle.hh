@@ -4,7 +4,7 @@
 #include "instruction.hh"
 #include "expression.hh"
 
-class Rectangle : public Rectangle {
+class Rectangle : public Instruction {
 	Expression* start;
 	Expression* opposed;
 public:
