@@ -106,9 +106,23 @@ void Printer::visitVar(const Var *v){
 }
 
 void Printer::visitRectangle(const Rectangle *r){
-    std::cout << "TODO" << std::endl;
+	r->getStart()->visit(*this);
+       	std::pair<double, double> start = bufferPosition;
+	r->getOpposed()->visit(*this);
+	std::pair<double, double> opposed = bufferPosition;	
+       
+	std::cout << "Rectangle : (" << start.first << "," << start.second <<") "<<
+		"(" << start.first << "," << opposed.second <<") " <<
+	 	"(" << opposed.first << "," << opposed.second <<") " <<
+		"(" << opposed.first << "," << start.second <<")" << std::endl;
 }
 
 void Printer::visitLine(const Line *l) {
-    std::cout << "TODO" << std::endl;
+	l->getStart()->visit(*this);
+	std::pair<double, double> start = bufferPosition;
+	l->getEnd()->visit(*this);
+	std::pair<double, double> end = bufferPosition;
+	
+	std::cout << "Line between (" <<start.first << "," << start.second << ") et (" <<
+	       end.first << "," << end.second << ")" << std::endl;
 }
