@@ -22,15 +22,21 @@ void Printer::visitPen(const Pen *p) {
     }
 }
 
-void Printer::visitCode(const Code *c) {
+void Printer::visitProgram(const Program *p) {
+	std::cout << "début du program" << std::endl;
 	img = CImg<unsigned char>(X_SIZE, Y_SIZE, Z_SIZE, NB_CAN); 
-    img.fill(255);
+	img.fill(255);
+	img.save_bmp("toto.bmp");
+    	std::cout << "fin du program" << std::endl;
+
+}
+
+void Printer::visitCode(const Code *c) {
     CodeItem *t = c->getFirst();
     while (t != NULL) {
         t->getInst()->visit(*this);
         t = t->getNext();
     }
-    img.save_bmp("toto.bmp");
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
