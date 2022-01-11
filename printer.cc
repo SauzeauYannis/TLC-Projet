@@ -22,15 +22,22 @@ void Printer::visitPen(const Pen *p) {
     }
 }
 
+void Printer::visitProgram(const Program *p) {
+	std::cout << "début du program" << std::endl;
+	img = CImg<unsigned char>(X_SIZE, Y_SIZE, Z_SIZE, NB_CAN); 
+	img.fill(255);
+	p->getCode()->visit(*this);
+	img.save_bmp("toto.bmp");
+    	std::cout << "fin du program" << std::endl;
+
+}
+
 void Printer::visitCode(const Code *c) {
-	img = CImg<unsigned char>(320, 240, 1 ,3); 
-    img.fill(255);
     CodeItem *t = c->getFirst();
     while (t != NULL) {
         t->getInst()->visit(*this);
         t = t->getNext();
     }
-    img.save_bmp("toto.bmp");
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
@@ -71,7 +78,10 @@ void Printer::visitLoop(const Loop *l) {
 }
 
 void Printer::visitTravel(const Travel *m) {
+	std::pair<double, double> previousPosition = bufferPosition;
 	m->getPosition()->visit(*this);
+	if(is_down)
+		img.draw_line(previousPosition.first, previousPosition.second, bufferPosition.first, bufferPosition.second, color);
     std::cout << "On bouge en (" << bufferPosition.first << ", " << bufferPosition.second << ")" << std::endl;
 }
 
@@ -79,8 +89,8 @@ void Printer::visitColor(const Color *c) {
     std::string colorHex = c->getColor().substr(1);
     char* cstr = new char[colorHex.length()+1];
     std::strcpy (cstr, colorHex.c_str());
-    sscanf(cstr, "%02x%02x%02x", &rgb.r, &rgb.g, &rgb.b);
-    std::cout << "On change la couleur en (" << rgb.r << ", " << rgb.g << ", " << rgb.b << ")" << std::endl;
+    sscanf(cstr, "%02hhx%02hhx%02hhx", &color[0], &color[1], &color[2]);
+    std::cout << "On change la couleur en (" << color[0] << ", " << color[1] << ", " << color[2] << ")" << std::endl;
     free(cstr);
 }
 
@@ -126,7 +136,7 @@ void Printer::visitRectangle(const Rectangle *r){
     std::pair<double, double> start = bufferPosition;
 	r->getOpposed()->visit(*this);
 	std::pair<double, double> opposed = bufferPosition;	
-       
+       	img.draw_rectangle(start.first, start.second, opposed.first, opposed.second, color);
 	std::cout << "Rectangle : (" << start.first << ", " << start.second <<") "<<
 		"(" << start.first << ", " << opposed.second <<") " <<
 	 	"(" << opposed.first << ", " << opposed.second <<") " <<

@@ -16,11 +16,17 @@
 #include "var.hh"
 #include "rectangle.hh"
 #include "line.hh"
+#include "program.hh"
 
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
 #include <cstring>
+
+#define X_SIZE 800
+#define Y_SIZE 600
+#define Z_SIZE 1
+#define NB_CAN 3
 
 class Printer : public Visitor {
 	bool is_down;
@@ -30,14 +36,11 @@ class Printer : public Visitor {
 	std::vector<std::string> protectedVar;
 	cimg_library::CImg<unsigned char> img;
 	unsigned char color[3] 	= {0, 0, 0};
-	struct {
-		unsigned int r;
-		unsigned int g;
-		unsigned int b;
-	} rgb;
+	
  public:
 	Printer() : is_down(false), vars{}, buffer_expr(0)
 				, bufferPosition(0, 0), protectedVar() { }
+	void visitProgram(const Program *p);
 	void visitCode(const Code *c);
 	void visitPen(const Pen *p);
 	void visitDeclaration(const Declaration *d);

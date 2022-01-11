@@ -14,9 +14,11 @@ class Position;
 class Var;
 class Rectangle;
 class Line;
+class Program;
 
 class Visitor {
  public:
+	virtual void visitProgram(const Program *p) =0;
 	virtual void visitCode(const Code *c) = 0;
 	virtual void visitPen(const Pen *p) = 0;
 	virtual void visitDeclaration(const Declaration *d) = 0;

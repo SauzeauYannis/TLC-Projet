@@ -38,7 +38,7 @@ void yyerror(const char* s) {
 %token<color> COLOR_VAL
 %token<inst> DOWN UP
 
-%type<inst> code instruction declaration affectation loop move color
+%type<inst> program code instruction declaration affectation loop move color
 %type<expr> pos value
 
 %left OPADD OPSUB
@@ -48,7 +48,9 @@ void yyerror(const char* s) {
 
 %%
 
-program: code { fullinstruction = $1; }
+program: code { 
+	fullinstruction =  new Program($1);
+}
 ;
 
 code: code instruction SC {
