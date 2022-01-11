@@ -1,6 +1,7 @@
 #ifndef _PRINTER_H
 #define _PRINTER_H
 
+#include "CImg.h"
 #include "visitor.hh"
 #include "code.hh"
 #include "pen.hh"
@@ -27,6 +28,8 @@ class Printer : public Visitor {
 	double buffer_expr;
 	std::pair<double, double> bufferPosition;
 	std::vector<std::string> protectedVar;
+	cimg_library::CImg<unsigned char> img;
+	unsigned char color[3] 	= {0, 0, 0};
 	struct {
 		unsigned int r;
 		unsigned int g;

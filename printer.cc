@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+using namespace cimg_library;
 
 void Printer::visitPen(const Pen *p) {
     if (p->getIsDown()) {
@@ -22,11 +23,14 @@ void Printer::visitPen(const Pen *p) {
 }
 
 void Printer::visitCode(const Code *c) {
+	img = CImg<unsigned char>(320, 240, 1 ,3); 
+    img.fill(255);
     CodeItem *t = c->getFirst();
     while (t != NULL) {
         t->getInst()->visit(*this);
         t = t->getNext();
     }
+    img.save_bmp("toto.bmp");
 }
 
 void Printer::visitDeclaration(const Declaration *d) {
@@ -134,7 +138,7 @@ void Printer::visitLine(const Line *l) {
 	std::pair<double, double> start = bufferPosition;
 	l->getEnd()->visit(*this);
 	std::pair<double, double> end = bufferPosition;
-	
+	img.draw_line(start.first, start.second, end.first, end.second, color);	
 	std::cout << "Ligne entre (" <<start.first << "," << start.second << ") et (" <<
 	       end.first << ", " << end.second << ")" << std::endl;
 }
