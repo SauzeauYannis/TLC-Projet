@@ -1,10 +1,10 @@
-deplacer (1, 1);
+deplacer (100, 100);
 baisser;
-deplacer (3, 1);
-deplacer (4, 3);
-deplacer (1, 3);
-deplacer (1, 1);
+deplacer (300, 100);
+deplacer (300, 300);
+deplacer (100, 300);
+deplacer (100, 100);
 couleur #ff0000;
-ligne (1.5, 1) (1.5, 3);
+ligne (100, 100) (300, 300);
 couleur #0000ff;
-ligne (1, 1.5) (3.5, 1.5); 
+ligne (100, 300) (300, 100); 

@@ -22,6 +22,11 @@
 #include <algorithm>
 #include <cstring>
 
+#define X_SIZE 800
+#define Y_SIZE 600
+#define Z_SIZE 1
+#define NB_CAN 3
+
 class Printer : public Visitor {
 	bool is_down;
 	std::unordered_map<std::string, float> vars;
