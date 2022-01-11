@@ -92,8 +92,8 @@ affectation: ID AFFECT value {
 loop: LOOP ID value value SC code END LOOP { $$ = new Loop($2, $3, $4, $6); }
 ;
 
-move: MOVE pos { $$ = new Travel($2); }
-| LINE pos pos { $$ = new Line($2, $3); }
+move: MOVE pos 		{ $$ = new Travel($2); }
+| LINE pos pos 		{ $$ = new Line($2, $3); }
 | RECTANGLE pos pos { $$ = new Rectangle($2, $3); }
 ;
 

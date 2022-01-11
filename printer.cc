@@ -23,13 +23,18 @@ void Printer::visitPen(const Pen *p) {
 }
 
 void Printer::visitProgram(const Program *p) {
-	std::cout << "début du program" << std::endl;
+	std::cout << "début du programme" << std::endl;
 	img = CImg<unsigned char>(X_SIZE, Y_SIZE, Z_SIZE, NB_CAN); 
 	img.fill(255);
 	p->getCode()->visit(*this);
-	img.save_bmp("toto.bmp");
-    	std::cout << "fin du program" << std::endl;
-
+	img.save_bmp("dessin.bmp");
+    CImgDisplay disp;
+    disp.display(img);
+    while (!disp.is_closed()) {
+        if (disp.key() == cimg::keyQ) disp.close();
+        disp.wait();
+    }
+    std::cout << "fin du programme" << std::endl;
 }
 
 void Printer::visitCode(const Code *c) {
@@ -90,7 +95,7 @@ void Printer::visitColor(const Color *c) {
     char* cstr = new char[colorHex.length()+1];
     std::strcpy (cstr, colorHex.c_str());
     sscanf(cstr, "%02hhx%02hhx%02hhx", &color[0], &color[1], &color[2]);
-    std::cout << "On change la couleur en (" << color[0] << ", " << color[1] << ", " << color[2] << ")" << std::endl;
+    std::cout << "On change la couleur en (" << (int)color[0] << ", " << (int)color[1] << ", " << (int)color[2] << ")" << std::endl;
     free(cstr);
 }
 
@@ -127,8 +132,13 @@ void Printer::visitPosition(const Position *p) {
 }
 
 void Printer::visitVar(const Var *v){
-   	buffer_expr = vars[v->getIdent()];
-    std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
+    if (vars.find(v->getIdent()) != vars.end()) {
+   	    buffer_expr = vars[v->getIdent()];
+        std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
+    } else {
+        std::cerr << "[ERREUR] La variable " << v->getIdent() << " n'existe pas" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 void Printer::visitRectangle(const Rectangle *r){
