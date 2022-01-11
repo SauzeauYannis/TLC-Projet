@@ -26,6 +26,7 @@ void Printer::visitProgram(const Program *p) {
 	std::cout << "début du program" << std::endl;
 	img = CImg<unsigned char>(X_SIZE, Y_SIZE, Z_SIZE, NB_CAN); 
 	img.fill(255);
+	p->getCode()->visit(*this);
 	img.save_bmp("toto.bmp");
     	std::cout << "fin du program" << std::endl;
 

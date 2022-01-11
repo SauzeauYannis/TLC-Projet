@@ -49,8 +49,7 @@ void yyerror(const char* s) {
 %%
 
 program: code { 
-	$$ = new Program($1);
-	fullinstruction = $1;
+	fullinstruction =  new Program($1);
 }
 ;
 
