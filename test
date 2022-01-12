@@ -1,4 +1,7 @@
-baisser;
+/*
+Ok ceci est un commentaire
+*/
+// baisser;
 var a;
 a <- 5;
 baisser;

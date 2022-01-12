@@ -1,5 +1,0 @@
-deplacer(0,0);
-boucle n 1 2;
-fin boucle;
-
-deplacer(3,3);
