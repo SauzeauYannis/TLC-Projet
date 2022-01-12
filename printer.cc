@@ -40,6 +40,15 @@ void Printer::visitProgram(const Program *p) {
     std::cout << "fin du programme" << std::endl;
 }
 
+void Printer::visitEntete(const Entete *e) {
+	std::cout << "TODO" << std::endl;
+}
+
+
+
+
+
+
 void Printer::visitCode(const Code *c) {
     CodeItem *t = c->getFirst();
     while (t != NULL) {

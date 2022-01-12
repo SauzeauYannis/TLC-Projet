@@ -17,6 +17,7 @@
 #include "rectangle.hh"
 #include "line.hh"
 #include "program.hh"
+#include "entete.hh"
 
 #include <unordered_map>
 #include <vector>
@@ -52,6 +53,7 @@ class Printer : public Visitor {
 	void visitVar(const Var *v);
 	void visitRectangle(const Rectangle *r);
 	void visitLine(const Line *l);
+	void visitEntete(const Entete *e);
 };
 
 #endif

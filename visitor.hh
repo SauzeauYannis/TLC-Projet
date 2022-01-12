@@ -15,6 +15,7 @@ class Var;
 class Rectangle;
 class Line;
 class Program;
+class Entete;
 
 class Visitor {
  public:
@@ -32,6 +33,8 @@ class Visitor {
 	virtual void visitVar(const Var *v) = 0;
 	virtual void visitRectangle(const Rectangle *r) = 0;
 	virtual void visitLine(const Line *l) = 0;
+	virtual void visitEntete(const Entete *e) = 0;
+
 };
 
 #endif
