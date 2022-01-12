@@ -7,6 +7,6 @@ Travel::~Travel(){
 	delete(pos);
 }
 
-void Travel::visit(Visitor& visitor) const{
+void Travel::visit(Visitor& visitor) const {
 	return visitor.visitTravel(this);
 }

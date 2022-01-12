@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <cstring>
+
 using namespace cimg_library;
 
 void Printer::visitPen(const Pen *p) {
@@ -40,6 +43,7 @@ void Printer::visitProgram(const Program *p) {
 void Printer::visitCode(const Code *c) {
     CodeItem *t = c->getFirst();
     while (t != NULL) {
+        std::cout << t->getInst() << std::endl;
         t->getInst()->visit(*this);
         t = t->getNext();
     }
@@ -67,25 +71,31 @@ void Printer::visitAffectation(const Affectation *a) {
 }
 
 void Printer::visitLoop(const Loop *l) {
-    l->getMin()->visit(*this);
-    double min = buffer_expr;
-    l->getMax()->visit(*this);
-    double max = buffer_expr;
-    if (std::find(protectedVar.begin(), protectedVar.end(), l->getIncr()) == protectedVar.end()) {
-        protectedVar.push_back(l->getIncr());	    
-        for (double i = min; i <= max; i++){
-            vars[l->getIncr()] = i;	
-            std::cout << l->getIncr() << " = " << i << std::endl;
-            l->getBody()->visit(*this);
+    if (vars.find(l->getIncr()) == vars.end()) {
+        l->getMin()->visit(*this);
+        double min = buffer_expr;
+        l->getMax()->visit(*this);
+        double max = buffer_expr;
+        if (std::find(protectedVar.begin(), protectedVar.end(), l->getIncr()) == protectedVar.end()) {
+            protectedVar.push_back(l->getIncr());	    
+            for (double i = min; i <= max; i++) {
+                vars[l->getIncr()] = i;	
+                std::cout << l->getIncr() << " = " << i << std::endl;
+                l->getBody()->visit(*this);
+            }
+            vars.erase(l->getIncr());
+            protectedVar.pop_back();
         }
-        protectedVar.pop_back();
+    } else {
+        std::cerr << "[ERREUR] La variable " << l->getIncr() << " est deja declare" << std::endl;
+        exit(EXIT_FAILURE);
     }
 }
 
-void Printer::visitTravel(const Travel *m) {
+void Printer::visitTravel(const Travel *t) {
 	std::pair<double, double> previousPosition = bufferPosition;
-	m->getPosition()->visit(*this);
-	if(is_down)
+	t->getPosition()->visit(*this);
+	if (is_down)
 		img.draw_line(previousPosition.first, previousPosition.second, bufferPosition.first, bufferPosition.second, color);
     std::cout << "On bouge en (" << bufferPosition.first << ", " << bufferPosition.second << ")" << std::endl;
 }
@@ -96,7 +106,7 @@ void Printer::visitColor(const Color *c) {
     std::strcpy (cstr, colorHex.c_str());
     sscanf(cstr, "%02hhx%02hhx%02hhx", &color[0], &color[1], &color[2]);
     std::cout << "On change la couleur en (" << (int)color[0] << ", " << (int)color[1] << ", " << (int)color[2] << ")" << std::endl;
-    free(cstr);
+    delete[] cstr;
 }
 
 void Printer::visitValue(const Value *v) {
@@ -128,7 +138,7 @@ void Printer::visitPosition(const Position *p) {
 	p->getY()->visit(*this);
 	double y = buffer_expr;	
 	bufferPosition = std::pair<double, double>(x, y);
-	std::cout << "Position = (" << x << ", " << y << ")" << std::endl;
+	std::cout << "Position = (" << bufferPosition.first << ", " << bufferPosition.second << ")" << std::endl;
 }
 
 void Printer::visitVar(const Var *v){
@@ -141,7 +151,7 @@ void Printer::visitVar(const Var *v){
     }
 }
 
-void Printer::visitRectangle(const Rectangle *r){
+void Printer::visitRectangle(const Rectangle *r) {
 	r->getStart()->visit(*this);
     std::pair<double, double> start = bufferPosition;
 	r->getOpposed()->visit(*this);

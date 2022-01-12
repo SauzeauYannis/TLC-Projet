@@ -20,8 +20,6 @@
 
 #include <unordered_map>
 #include <vector>
-#include <algorithm>
-#include <cstring>
 
 #define X_SIZE 800
 #define Y_SIZE 600
@@ -46,7 +44,7 @@ class Printer : public Visitor {
 	void visitDeclaration(const Declaration *d);
 	void visitAffectation(const Affectation *a);
 	void visitLoop(const Loop *l);
-	void visitTravel(const Travel *m);
+	void visitTravel(const Travel *t);
 	void visitColor(const Color *c);
 	void visitValue(const Value *v);
 	void visitOperator(const Operator *o);

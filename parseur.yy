@@ -58,7 +58,7 @@ code: code instruction SC {
 	c->add($2);
 	$$ = c;
 }
-| { }
+| { $$ = NULL; }
 ;
 
 instruction: 
