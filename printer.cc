@@ -81,7 +81,8 @@ void Printer::visitLoop(const Loop *l) {
             for (double i = min; i <= max; i++) {
                 vars[l->getIncr()] = i;	
                 std::cout << l->getIncr() << " = " << i << std::endl;
-                l->getBody()->visit(*this);
+                if(l->getBody() != NULL)
+			l->getBody()->visit(*this);
             }
             vars.erase(l->getIncr());
             protectedVar.pop_back();
