@@ -6,6 +6,8 @@
 
 %%
 
+"/*"(.|\n)*"*/"|"//".*\n {}
+
 taille  { return SIZE; }
 nom     { return NAME; }
 \"[a-zA-Z0-9_]+\"  { strcpy(yylval.name, yytext); return NAME_W; }
@@ -42,6 +44,6 @@ fin    { return END; }
 [0-9]+[.]?[0-9]*      { yylval.value = atof(yytext); return NUM; }
 [a-zA-Z][a-zA-Z0-9_]* { strcpy(yylval.ident, yytext); return ID; }
 
-"/*"(.|\n)*"*/"|"//".*\n|.|\n {}
+.|\n {}
 
 %%

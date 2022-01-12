@@ -12,6 +12,8 @@ void yyerror(const char* s) {
 
 %}
 
+%define parse.error verbose
+
 %code requires {
 	#include "printer.hh"
 }
@@ -64,6 +66,7 @@ header: SIZE pos SC NAME NAME_W SC {
 | SIZE pos SC NAME NAME_W SC DISPLAY SC {
 	$$ = new Entete($2, $5, true);
 }
+| { $$ = new Entete(new Position(new Value(800), new Value(600)), "\"dessin\"", false); }
 ;
 
 code: code instruction SC {
