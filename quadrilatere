@@ -1,3 +1,12 @@
+/*
+* Obligé de mettre avant le code
+*/ 
+taille (800, 600);     // img.size(800, 600)
+nom "quadrilatere";    // save("quadrilatere.bmp")
+affiche;               // Optionnel
+/*
+* Le code
+*/
 deplacer (100, 100);
 baisser;
 deplacer (300, 100);

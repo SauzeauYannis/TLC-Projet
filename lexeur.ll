@@ -6,6 +6,10 @@
 
 %%
 
+taille  { return SIZE; }
+nom     { strcpy(yylval.name, yytext);return NAME; }
+affiche { return DISPLAY; }
+
 baisser { return DOWN; }
 lever   { return UP; }
 

@@ -43,7 +43,6 @@ void Printer::visitProgram(const Program *p) {
 void Printer::visitCode(const Code *c) {
     CodeItem *t = c->getFirst();
     while (t != NULL) {
-        std::cout << t->getInst() << std::endl;
         t->getInst()->visit(*this);
         t = t->getNext();
     }

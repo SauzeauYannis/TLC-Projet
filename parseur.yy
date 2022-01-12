@@ -18,12 +18,14 @@ void yyerror(const char* s) {
 
 %union {
 	char ident[255];
+	char name[255];
 	char color[7];
 	double value;
   	Instruction* inst;
   	Expression* expr;
 }
 
+%token SIZE NAME DISPLAY
 %token MOVE LINE RECTANGLE
 %token COLOR
 %token OPADD OPSUB OPMUL OPDIV
@@ -38,7 +40,7 @@ void yyerror(const char* s) {
 %token<color> COLOR_VAL
 %token<inst> DOWN UP
 
-%type<inst> program code instruction declaration affectation loop move color
+%type<inst> program struct header code instruction declaration affectation loop move color
 %type<expr> pos value
 
 %left OPADD OPSUB
@@ -48,8 +50,23 @@ void yyerror(const char* s) {
 
 %%
 
-program: code { 
+program: struct { 
 	fullinstruction =  new Program($1);
+}
+;
+
+struct: header code {
+	Code *c = new Code($1);
+	c->add($2);
+	$$ = c;
+}
+;
+
+header: SIZE pos SC NAME SC {
+	$$ = new Header($2, $4, false);
+}
+| SIZE pos SC NAME SC DISPLAY SC {
+	$$ = new Header($2, $4, true);
 }
 ;
 
@@ -85,7 +102,7 @@ declaration: VAR ID AFFECT value {
 ;
 
 affectation: ID AFFECT value {
-	$$ = new Affectation( $1, $3);	  
+	$$ = new Affectation($1, $3);	  
 }
 ;
 
@@ -93,8 +110,18 @@ loop: LOOP ID value value SC code END LOOP { $$ = new Loop($2, $3, $4, $6); }
 ;
 
 move: MOVE pos 		{ $$ = new Travel($2); }
-| LINE pos pos 		{ $$ = new Line($2, $3); }
 | RECTANGLE pos pos { $$ = new Rectangle($2, $3); }
+| LINE pos pos 		{
+	Pen *p = new Pen(false);
+	Travel *t = new Travel($2);
+	Pen *p2 = new Pen(true);
+	Travel *t2 = new Travel($3);
+	Code *code = new Code(p);
+	code->add(t);
+	code->add(p2);
+	code->add(t2);
+	$$ = code;
+}
 ;
 
 color: COLOR COLOR_VAL { $$ = new Color($2); }
