@@ -28,6 +28,8 @@
 #define NB_CAN 3
 
 class Printer : public Visitor {
+	bool display;
+	std::string name;
 	bool is_down;
 	std::unordered_map<std::string, float> vars;
 	double buffer_expr;

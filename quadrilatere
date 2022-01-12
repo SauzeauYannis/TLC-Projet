@@ -1,11 +1,10 @@
+// ca ca marche
+/* ca ca marche pas 
+*/
+taille (800, 600);   
+nom "quadrilatere";    
 /*
-* Obligé de mettre avant le code
-*/ 
-taille (800, 600);     // img.size(800, 600)
-nom "quadrilatere";    // save("quadrilatere.bmp")
-affiche;               // Optionnel
-/*
-* Le code
+* Le codeziazzazazaazza
 */
 deplacer (100, 100);
 baisser;

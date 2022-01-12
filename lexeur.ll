@@ -7,7 +7,8 @@
 %%
 
 taille  { return SIZE; }
-nom     { strcpy(yylval.name, yytext);return NAME; }
+nom     { return NAME; }
+\"[a-zA-Z0-9_]+\"  { strcpy(yylval.name, yytext); return NAME_W; }
 affiche { return DISPLAY; }
 
 baisser { return DOWN; }

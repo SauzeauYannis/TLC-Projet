@@ -36,11 +36,12 @@ void yyerror(const char* s) {
 %token LPAR RPAR COMMA
 
 %token<ident> ID
+%token<name> NAME_W
 %token<value> NUM
 %token<color> COLOR_VAL
 %token<inst> DOWN UP
 
-%type<inst> program struct header code instruction declaration affectation loop move color
+%type<inst> program header code instruction declaration affectation loop move color
 %type<expr> pos value
 
 %left OPADD OPSUB
@@ -50,23 +51,18 @@ void yyerror(const char* s) {
 
 %%
 
-program: struct { 
-	fullinstruction =  new Program($1);
+program: header code { 
+    Code *c = new Code($1);
+    c->add($2);
+    fullinstruction =  new Program(c);
 }
 ;
 
-struct: header code {
-	Code *c = new Code($1);
-	c->add($2);
-	$$ = c;
+header: SIZE pos SC NAME NAME_W SC {
+	$$ = new Entete($2, $5, false);
 }
-;
-
-header: SIZE pos SC NAME SC {
-	$$ = new Header($2, $4, false);
-}
-| SIZE pos SC NAME SC DISPLAY SC {
-	$$ = new Header($2, $4, true);
+| SIZE pos SC NAME NAME_W SC DISPLAY SC {
+	$$ = new Entete($2, $5, true);
 }
 ;
 

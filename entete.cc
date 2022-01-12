@@ -1,6 +1,6 @@
 #include "entete.hh"
 
-Entete::Entete(Expression *taille, std::string name; bool affiche) :
+Entete::Entete(Expression *taille, std::string name, bool affiche) :
 	taille(taille), name(name), affiche(affiche)
 {
 }

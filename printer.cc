@@ -27,26 +27,29 @@ void Printer::visitPen(const Pen *p) {
 
 void Printer::visitProgram(const Program *p) {
 	std::cout << "début du programme" << std::endl;
-	img = CImg<unsigned char>(X_SIZE, Y_SIZE, Z_SIZE, NB_CAN); 
-	img.fill(255);
 	p->getCode()->visit(*this);
-	img.save_bmp("dessin.bmp");
-    CImgDisplay disp;
-    disp.display(img);
-    while (!disp.is_closed()) {
-        if (disp.key() == cimg::keyQ) disp.close();
-        disp.wait();
+    char* cstr = new char[name.length()+1];
+    std::strcpy (cstr, name.c_str());
+	img.save_bmp(cstr);
+    if (display) {
+        CImgDisplay disp;
+        disp.display(img);
+        while (!disp.is_closed()) {
+            if (disp.key() == cimg::keyQ) disp.close();
+            disp.wait();
+        }
     }
     std::cout << "fin du programme" << std::endl;
 }
 
 void Printer::visitEntete(const Entete *e) {
-	std::cout << "TODO" << std::endl;
+    e->getTaille()->visit(*this);
+	img = CImg<unsigned char>(bufferPosition.first, bufferPosition.second, Z_SIZE, NB_CAN); 
+	img.fill(255);
+    name = e->getName();
+    name = name.substr(1, name.size() - 2) + ".bmp";
+    display = e->getAffiche();
 }
-
-
-
-
 
 
 void Printer::visitCode(const Code *c) {

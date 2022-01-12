@@ -1,5 +1,5 @@
-SRC=code.cc program.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc affectation.cc declaration.cc color.cc loop.cc travel.cc operator.cc position.cc value.cc var.cc rectangle.cc line.cc
-SRCH=affectation.hh code.hh program.hh color.hh declaration.hh expression.hh instruction.hh loop.hh travel.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh var.hh rectangle.hh line.hh CImg.h
+SRC=code.cc program.cc entete.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc affectation.cc declaration.cc color.cc loop.cc travel.cc operator.cc position.cc value.cc var.cc rectangle.cc line.cc
+SRCH=affectation.hh code.hh entete.hh program.hh color.hh declaration.hh expression.hh instruction.hh loop.hh travel.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh var.hh rectangle.hh line.hh CImg.h
 CXX=g++
 FLAGS =-lX11 -lpthread -ll
 OBJ=$(SRC:.cc=.o)
