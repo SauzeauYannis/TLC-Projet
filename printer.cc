@@ -45,7 +45,9 @@ void Printer::visitProgram(const Program *p) {
 void Printer::visitEntete(const Entete *e) {
     e->getTaille()->visit(*this);
 	img = CImg<unsigned char>(bufferPosition.first, bufferPosition.second, Z_SIZE, NB_CAN); 
-	img.fill(255);
+	e->getColor()->visit(*this);
+    img.fill(color[0], color[1], color[2]);
+    color[0] = 0; color[1] = 0; color[2] = 0;
     name = e->getName();
     name = "Exemple/" + name.substr(1, name.size() - 2) + ".bmp";
     display = e->getAffiche();
@@ -98,7 +100,7 @@ void Printer::visitLoop(const Loop *l) {
             protectedVar.pop_back();
         }
     } else {
-        std::cerr << "[ERREUR] La variable " << l->getIncr() << " est deja declare" << std::endl;
+        std::cerr << "[ERREUR] La variable " << l->getIncr() << " est en lecture seule et ne peut donc pas être affectee" << std::endl;
         exit(EXIT_FAILURE);
     }
 }

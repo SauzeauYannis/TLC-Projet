@@ -1,5 +1,6 @@
 taille (700, 700);
 nom "cube";
+couleur #DDDDDD;
 affiche;
 
 couleur #581845;

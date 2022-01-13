@@ -4,6 +4,7 @@
 
 taille (400, 400);
 nom "quadrilatere";
+couleur #AAAAAA;
 affiche;
 
 /********

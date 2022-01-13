@@ -503,7 +503,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  29
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  62
+#define YYNSTATES  64
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   282
@@ -553,9 +553,9 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    56,    56,    63,    66,    69,    77,    82,    86,    87,
-      88,    89,    90,    91,    92,    95,   102,   108,   113,   116,
-     117,   118,   131,   134,   135,   136,   137,   138,   139,   142
+       0,    56,    56,    63,    66,    69,    78,    83,    87,    88,
+      89,    90,    91,    92,    93,    96,   103,   109,   114,   117,
+     118,   119,   132,   135,   136,   137,   138,   139,   140,   143
 };
 #endif
 
@@ -603,8 +603,8 @@ static const yytype_int8 yypact[] =
      -28,    24,   -28,   -28,   -28,   -28,   -28,   -14,   -14,   -14,
      -14,   -14,    12,   -28,    -4,    -4,   -28,    26,   -14,   -14,
      -28,     1,     1,   -28,   -28,    57,    27,   -28,   -28,   -14,
-      38,    72,   -28,    39,    72,    68,    34,   -28,   -28,    10,
-      40,   -28
+      38,    72,   -28,    35,    72,    68,    34,   -28,    48,    10,
+      37,    41,   -28,   -28
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -617,14 +617,14 @@ static const yytype_int8 yydefact[] =
       14,     0,     8,     9,    10,    11,    12,     0,     0,     0,
        0,     0,     0,    19,     0,     0,    22,    16,     0,     0,
        6,    25,    26,    27,    28,     0,     0,    21,    20,     0,
-       0,    17,    29,     3,    15,     0,     0,     7,     4,     0,
-       0,    18
+       0,    17,    29,     0,    15,     0,     0,     7,     3,     0,
+       0,     0,     4,    18
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -28,   -28,   -28,    -1,   -28,   -28,   -28,   -28,   -28,   -28,
+     -28,   -28,   -28,     0,   -28,   -28,   -28,   -28,   -28,     8,
      -27,    -7
 };
 
@@ -642,11 +642,11 @@ static const yytype_int8 yytable[] =
 {
       41,    42,    43,    44,    45,    33,    34,    35,     8,     1,
        9,    50,    51,    29,    30,     4,    12,    13,    14,    15,
-       6,    11,    54,    55,    16,    17,    60,    47,    48,    32,
+       6,    11,    54,    55,    16,    17,    61,    47,    48,    32,
       36,    37,    18,    38,    39,    46,    19,    20,    12,    13,
-      14,    15,    40,    49,    56,    53,    16,    17,    27,    28,
-      29,    30,    58,     0,    18,    61,    59,     0,    19,    20,
-       8,     0,     9,    27,    28,    29,    30,    27,    28,    29,
+      14,    15,    40,    49,    15,    53,    16,    17,    27,    28,
+      29,    30,    58,    60,    18,    62,    63,    59,    19,    20,
+       8,    56,     9,    27,    28,    29,    30,    27,    28,    29,
       30,     0,     0,     0,    31,     0,     0,    52,    27,    28,
       29,    30,    27,    28,    29,    30,    57
 };
@@ -657,9 +657,9 @@ static const yytype_int8 yycheck[] =
       24,    38,    39,    12,    13,    19,     6,     7,     8,     9,
        0,    18,    49,    50,    14,    15,    16,    34,    35,     4,
       25,    22,    22,    22,    17,    23,    26,    27,     6,     7,
-       8,     9,    18,    17,     5,    18,    14,    15,    10,    11,
-      12,    13,    18,    -1,    22,    15,    57,    -1,    26,    27,
-      22,    -1,    24,    10,    11,    12,    13,    10,    11,    12,
+       8,     9,    18,    17,     9,    18,    14,    15,    10,    11,
+      12,    13,    18,     5,    22,    18,    15,    57,    26,    27,
+      22,    53,    24,    10,    11,    12,    13,    10,    11,    12,
       13,    -1,    -1,    -1,    21,    -1,    -1,    20,    10,    11,
       12,    13,    10,    11,    12,    13,    18
 };
@@ -673,8 +673,8 @@ static const yytype_int8 yystos[] =
       27,    32,    33,    34,    35,    36,    37,    10,    11,    12,
       13,    21,     4,    39,    39,    39,    25,    22,    22,    17,
       18,    38,    38,    38,    38,    38,    23,    39,    39,    17,
-      38,    38,    20,    18,    38,    38,     5,    18,    18,    31,
-      16,    15
+      38,    38,    20,    18,    38,    38,    37,    18,    18,    31,
+       5,    16,    18,    15
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -688,7 +688,7 @@ static const yytype_int8 yyr1[] =
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     6,     8,     0,     3,     0,     1,     1,
+       0,     2,     2,     8,    10,     0,     3,     0,     1,     1,
        1,     1,     1,     1,     1,     4,     2,     3,     8,     2,
        3,     3,     2,     1,     1,     3,     3,     3,     3,     5
 };
@@ -1397,16 +1397,16 @@ yyreduce:
 
   case 3:
 #line 63 "parseur.yy"
-                                   {
-	(yyval.inst) = new Entete((yyvsp[-4].expr), (yyvsp[-1].name), false);
+                                            {
+	(yyval.inst) = new Entete((yyvsp[-6].expr), (yyvsp[-3].name), (yyvsp[-1].inst), false);
 }
 #line 1404 "parseur.tab.cc"
     break;
 
   case 4:
 #line 66 "parseur.yy"
-                                        {
-	(yyval.inst) = new Entete((yyvsp[-6].expr), (yyvsp[-3].name), true);
+                                                 {
+	(yyval.inst) = new Entete((yyvsp[-8].expr), (yyvsp[-5].name), (yyvsp[-3].inst), true);
 }
 #line 1412 "parseur.tab.cc"
     break;
@@ -1417,71 +1417,72 @@ yyreduce:
 	Expression *x = new Value(800);
 	Expression *y = new Value(600);
 	Expression *pos = new Position(x, y);
-	(yyval.inst) = new Entete(pos, "\"dessin\"", false); 
+	Instruction *c = new Color("#FFFFFF");
+	(yyval.inst) = new Entete(pos, "\"dessin\"", c, false); 
 }
-#line 1423 "parseur.tab.cc"
+#line 1424 "parseur.tab.cc"
     break;
 
   case 6:
-#line 77 "parseur.yy"
+#line 78 "parseur.yy"
                           {
 	Code *c = new Code((yyvsp[-2].inst));
 	c->add((yyvsp[-1].inst));
 	(yyval.inst) = c;
 }
-#line 1433 "parseur.tab.cc"
+#line 1434 "parseur.tab.cc"
     break;
 
   case 7:
-#line 82 "parseur.yy"
+#line 83 "parseur.yy"
   { (yyval.inst) = nullptr; }
-#line 1439 "parseur.tab.cc"
+#line 1440 "parseur.tab.cc"
     break;
 
   case 8:
-#line 86 "parseur.yy"
+#line 87 "parseur.yy"
               { (yyval.inst) = (yyvsp[0].inst); }
-#line 1445 "parseur.tab.cc"
+#line 1446 "parseur.tab.cc"
     break;
 
   case 9:
-#line 87 "parseur.yy"
+#line 88 "parseur.yy"
               { (yyval.inst) = (yyvsp[0].inst); }
-#line 1451 "parseur.tab.cc"
+#line 1452 "parseur.tab.cc"
     break;
 
   case 10:
-#line 88 "parseur.yy"
+#line 89 "parseur.yy"
                   { (yyval.inst) = (yyvsp[0].inst); }
-#line 1457 "parseur.tab.cc"
+#line 1458 "parseur.tab.cc"
     break;
 
   case 11:
-#line 89 "parseur.yy"
+#line 90 "parseur.yy"
               { (yyval.inst) = (yyvsp[0].inst); }
-#line 1463 "parseur.tab.cc"
+#line 1464 "parseur.tab.cc"
     break;
 
   case 12:
-#line 90 "parseur.yy"
+#line 91 "parseur.yy"
                   { (yyval.inst) = (yyvsp[0].inst); }
-#line 1469 "parseur.tab.cc"
+#line 1470 "parseur.tab.cc"
     break;
 
   case 13:
-#line 91 "parseur.yy"
+#line 92 "parseur.yy"
                   { (yyval.inst) = new Pen(true); }
-#line 1475 "parseur.tab.cc"
+#line 1476 "parseur.tab.cc"
     break;
 
   case 14:
-#line 92 "parseur.yy"
+#line 93 "parseur.yy"
                   { (yyval.inst) = new Pen(false); }
-#line 1481 "parseur.tab.cc"
+#line 1482 "parseur.tab.cc"
     break;
 
   case 15:
-#line 95 "parseur.yy"
+#line 96 "parseur.yy"
                                  {
 	Declaration *d = new Declaration((yyvsp[-2].ident));
 	Affectation *a = new Affectation((yyvsp[-2].ident), (yyvsp[0].expr));
@@ -1489,46 +1490,46 @@ yyreduce:
 	code->add(a);
 	(yyval.inst) = code;
 }
-#line 1493 "parseur.tab.cc"
+#line 1494 "parseur.tab.cc"
     break;
 
   case 16:
-#line 102 "parseur.yy"
+#line 103 "parseur.yy"
          {
 	Declaration *d = new Declaration((yyvsp[0].ident));
 	(yyval.inst) = d;
 }
-#line 1502 "parseur.tab.cc"
+#line 1503 "parseur.tab.cc"
     break;
 
   case 17:
-#line 108 "parseur.yy"
+#line 109 "parseur.yy"
                              {
 	(yyval.inst) = new Affectation((yyvsp[-2].ident), (yyvsp[0].expr));	  
 }
-#line 1510 "parseur.tab.cc"
+#line 1511 "parseur.tab.cc"
     break;
 
   case 18:
-#line 113 "parseur.yy"
+#line 114 "parseur.yy"
                                            { (yyval.inst) = new Loop((yyvsp[-6].ident), (yyvsp[-5].expr), (yyvsp[-4].expr), (yyvsp[-2].inst)); }
-#line 1516 "parseur.tab.cc"
+#line 1517 "parseur.tab.cc"
     break;
 
   case 19:
-#line 116 "parseur.yy"
+#line 117 "parseur.yy"
                         { (yyval.inst) = new Travel((yyvsp[0].expr)); }
-#line 1522 "parseur.tab.cc"
+#line 1523 "parseur.tab.cc"
     break;
 
   case 20:
-#line 117 "parseur.yy"
+#line 118 "parseur.yy"
                     { (yyval.inst) = new Rectangle((yyvsp[-1].expr), (yyvsp[0].expr)); }
-#line 1528 "parseur.tab.cc"
+#line 1529 "parseur.tab.cc"
     break;
 
   case 21:
-#line 118 "parseur.yy"
+#line 119 "parseur.yy"
                         {
 	Pen *p = new Pen(false);
 	Travel *t = new Travel((yyvsp[-1].expr));
@@ -1540,59 +1541,59 @@ yyreduce:
 	code->add(t2);
 	(yyval.inst) = code;
 }
-#line 1544 "parseur.tab.cc"
+#line 1545 "parseur.tab.cc"
     break;
 
   case 22:
-#line 131 "parseur.yy"
+#line 132 "parseur.yy"
                        { (yyval.inst) = new Color((yyvsp[0].color)); }
-#line 1550 "parseur.tab.cc"
+#line 1551 "parseur.tab.cc"
     break;
 
   case 23:
-#line 134 "parseur.yy"
+#line 135 "parseur.yy"
                                 { (yyval.expr) = new Value((yyvsp[0].value)); }
-#line 1556 "parseur.tab.cc"
+#line 1557 "parseur.tab.cc"
     break;
 
   case 24:
-#line 135 "parseur.yy"
+#line 136 "parseur.yy"
                                 { (yyval.expr) = new Var((yyvsp[0].ident)); }
-#line 1562 "parseur.tab.cc"
+#line 1563 "parseur.tab.cc"
     break;
 
   case 25:
-#line 136 "parseur.yy"
+#line 137 "parseur.yy"
                     { (yyval.expr) = new Operator(ADD, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1568 "parseur.tab.cc"
+#line 1569 "parseur.tab.cc"
     break;
 
   case 26:
-#line 137 "parseur.yy"
+#line 138 "parseur.yy"
                     { (yyval.expr) = new Operator(SUB, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1574 "parseur.tab.cc"
+#line 1575 "parseur.tab.cc"
     break;
 
   case 27:
-#line 138 "parseur.yy"
+#line 139 "parseur.yy"
                     { (yyval.expr) = new Operator(MUL, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1580 "parseur.tab.cc"
+#line 1581 "parseur.tab.cc"
     break;
 
   case 28:
-#line 139 "parseur.yy"
+#line 140 "parseur.yy"
                     { (yyval.expr) = new Operator(DIV, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1586 "parseur.tab.cc"
+#line 1587 "parseur.tab.cc"
     break;
 
   case 29:
-#line 142 "parseur.yy"
+#line 143 "parseur.yy"
                                  { (yyval.expr) = new Position((yyvsp[-3].expr), (yyvsp[-1].expr)); }
-#line 1592 "parseur.tab.cc"
+#line 1593 "parseur.tab.cc"
     break;
 
 
-#line 1596 "parseur.tab.cc"
+#line 1597 "parseur.tab.cc"
 
       default: break;
     }
@@ -1824,5 +1825,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 145 "parseur.yy"
+#line 146 "parseur.yy"
 

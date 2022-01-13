@@ -60,17 +60,18 @@ program: header code {
 }
 ;
 
-header: SIZE pos SC NAME NAME_W SC {
-	$$ = new Entete($2, $5, false);
+header: SIZE pos SC NAME NAME_W SC color SC {
+	$$ = new Entete($2, $5, $7, false);
 }
-| SIZE pos SC NAME NAME_W SC DISPLAY SC {
-	$$ = new Entete($2, $5, true);
+| SIZE pos SC NAME NAME_W SC color SC DISPLAY SC {
+	$$ = new Entete($2, $5, $7, true);
 }
 | {
 	Expression *x = new Value(800);
 	Expression *y = new Value(600);
 	Expression *pos = new Position(x, y);
-	$$ = new Entete(pos, "\"dessin\"", false); 
+	Instruction *c = new Color("#FFFFFF");
+	$$ = new Entete(pos, "\"dessin\"", c, false); 
 }
 ;
 

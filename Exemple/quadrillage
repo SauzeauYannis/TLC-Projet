@@ -1,5 +1,6 @@
 taille (500, 500);
 nom "quadrillage";
+couleur #CCCCCC;
 affiche;
 
 var nombre_lignes <- 10;

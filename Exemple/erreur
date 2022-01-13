@@ -6,6 +6,18 @@
 
 var a;
 
-// 1. Variable deja declare
-// var a;
+// 1. Variable deja declaree
+//var a;
+
+// 2. Variable n'existe pas
+//b <- 5;
+
+// 3. Affectation d'une variable d'iteration
+boucle b 0 10;
+	deplacer (b, b);
+	//b <- 1;
+fin boucle;
+
+// 4. Erreur de syntaxe
+//baisser; lever; baisser
 
