@@ -15,15 +15,12 @@
 #include "position.hh"
 #include "var.hh"
 #include "rectangle.hh"
-#include "line.hh"
 #include "program.hh"
 #include "entete.hh"
 
 #include <unordered_map>
 #include <vector>
 
-#define X_SIZE 800
-#define Y_SIZE 600
 #define Z_SIZE 1
 #define NB_CAN 3
 
@@ -54,7 +51,6 @@ class Printer : public Visitor {
 	void visitPosition(const Position *p);
 	void visitVar(const Var *v);
 	void visitRectangle(const Rectangle *r);
-	void visitLine(const Line *l);
 	void visitEntete(const Entete *e);
 };
 

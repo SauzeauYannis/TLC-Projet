@@ -1,5 +1,5 @@
-#ifndef VISITOR_H
-#define VISITOR_H
+#ifndef _VISITOR_H
+#define _VISITOR_H
 
 class Code;
 class Pen;
@@ -13,7 +13,6 @@ class Operator;
 class Position;
 class Var;
 class Rectangle;
-class Line;
 class Program;
 class Entete;
 
@@ -32,9 +31,7 @@ class Visitor {
 	virtual void visitPosition(const Position *p) = 0;
 	virtual void visitVar(const Var *v) = 0;
 	virtual void visitRectangle(const Rectangle *r) = 0;
-	virtual void visitLine(const Line *l) = 0;
 	virtual void visitEntete(const Entete *e) = 0;
-
 };
 
 #endif

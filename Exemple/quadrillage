@@ -1,0 +1,14 @@
+taille (500, 500);
+nom "quadrillage";
+affiche;
+
+var nombre_lignes <- 10;
+var nombre_colonnes <- 10;
+
+boucle n 0 nombre_lignes;
+    ligne (0, n * 50) (nombre_colonnes * 50, n * 50);
+fin boucle;
+
+boucle n 0 nombre_colonnes;
+    ligne (n * 50, 0) (n * 50, nombre_lignes * 50);
+fin boucle;

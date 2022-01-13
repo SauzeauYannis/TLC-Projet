@@ -1,0 +1,23 @@
+/**********
+ * Entete *
+ **********/
+
+taille (400, 400);
+nom "quadrilatere";
+affiche;
+
+/********
+ * Code *
+ ********/
+
+// Construction du quadrilatere
+ligne (100, 100) (300, 100);
+deplacer (300, 300);
+deplacer (100, 300);
+deplacer (100, 100);
+
+// Construction de la croix
+couleur #ff0000; // rgb(255, 0, 0) => rouge
+ligne (100, 100) (300, 300);
+couleur #0000ff; // rgb(0, 0, 255) => bleu
+ligne (100, 300) (300, 100); 

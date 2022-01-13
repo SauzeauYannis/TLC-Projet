@@ -1,0 +1,43 @@
+taille (700, 700);
+nom "cube";
+affiche;
+
+couleur #581845;
+
+deplacer (100, 200);
+
+baisser;
+
+deplacer (500, 200);
+deplacer (500, 600);
+deplacer (100, 600);
+deplacer (100, 200);
+
+deplacer (200, 100);
+deplacer (600, 100);
+deplacer (600, 500);
+deplacer (500, 600);
+
+lever;
+
+deplacer (500, 200);
+
+baisser;
+
+deplacer (600, 100);
+
+lever;
+
+deplacer (200, 100);
+
+boucle n 0 9;
+    ligne (200, 110 + n * 40) (200, 130 + n * 40);
+fin boucle;
+
+boucle n 0 9;
+    ligne (210 + n * 40, 500) (230 + n * 40, 500);
+fin boucle;
+
+boucle n 0 2;
+    ligne (200 - n * 40, 500 + n * 40) (180 - n * 40, 520 + n * 40);
+fin boucle;

@@ -44,7 +44,7 @@ void yyerror(const char* s) {
 %token<inst> DOWN UP
 
 %type<inst> program header code instruction declaration affectation loop move color
-%type<expr> pos value
+%type<expr> value pos
 
 %left OPADD OPSUB
 %left OPMUL OPDIV
@@ -66,7 +66,12 @@ header: SIZE pos SC NAME NAME_W SC {
 | SIZE pos SC NAME NAME_W SC DISPLAY SC {
 	$$ = new Entete($2, $5, true);
 }
-| { $$ = new Entete(new Position(new Value(800), new Value(600)), "\"dessin\"", false); }
+| {
+	Expression *x = new Value(800);
+	Expression *y = new Value(600);
+	Expression *pos = new Position(x, y);
+	$$ = new Entete(pos, "\"dessin\"", false); 
+}
 ;
 
 code: code instruction SC {
@@ -74,7 +79,7 @@ code: code instruction SC {
 	c->add($2);
 	$$ = c;
 }
-| { $$ = NULL; }
+| { $$ = nullptr; }
 ;
 
 instruction: 

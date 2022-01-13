@@ -10,14 +10,14 @@ using namespace cimg_library;
 void Printer::visitPen(const Pen *p) {
     if (p->getIsDown()) {
         if (is_down) {
-            std::cout << "Le stylo est deja baisser" << std::endl;;
+            std::cout << "Le stylo est deja baisse" << std::endl;;
         } else {
             is_down = true;
             std::cout << "Le stylo se baisse" << std::endl;;
         }
     } else {
         if (!is_down) {
-            std::cout << "Le stylo est deja lever" << std::endl;;
+            std::cout << "Le stylo est deja leve" << std::endl;;
         } else {
             is_down = false;
             std::cout << "Le stylo se leve" << std::endl;;
@@ -26,7 +26,7 @@ void Printer::visitPen(const Pen *p) {
 }
 
 void Printer::visitProgram(const Program *p) {
-	std::cout << "début du programme" << std::endl;
+	std::cout << "Debut du programme" << std::endl;
 	p->getCode()->visit(*this);
     char* cstr = new char[name.length()+1];
     std::strcpy (cstr, name.c_str());
@@ -39,7 +39,7 @@ void Printer::visitProgram(const Program *p) {
             disp.wait();
         }
     }
-    std::cout << "fin du programme" << std::endl;
+    std::cout << "Fin du programme" << std::endl;
 }
 
 void Printer::visitEntete(const Entete *e) {
@@ -47,7 +47,7 @@ void Printer::visitEntete(const Entete *e) {
 	img = CImg<unsigned char>(bufferPosition.first, bufferPosition.second, Z_SIZE, NB_CAN); 
 	img.fill(255);
     name = e->getName();
-    name = name.substr(1, name.size() - 2) + ".bmp";
+    name = "Exemple/" + name.substr(1, name.size() - 2) + ".bmp";
     display = e->getAffiche();
 }
 
@@ -63,7 +63,7 @@ void Printer::visitCode(const Code *c) {
 void Printer::visitDeclaration(const Declaration *d) {
     if (vars.find(d->getVar()) == vars.end()) {
         vars[d->getVar()] = 0;    
-        std::cout << "On declare une nouvelle variable nomme " << d->getVar() << std::endl;
+        std::cout << "On declare une nouvelle variable nommee " << d->getVar() << std::endl;
     } else {
         std::cerr << "[ERREUR] La variable " << d->getVar() << " est deja declare" << std::endl;
         exit(EXIT_FAILURE);
@@ -116,7 +116,7 @@ void Printer::visitColor(const Color *c) {
     char* cstr = new char[colorHex.length()+1];
     std::strcpy (cstr, colorHex.c_str());
     sscanf(cstr, "%02hhx%02hhx%02hhx", &color[0], &color[1], &color[2]);
-    std::cout << "On change la couleur en (" << (int)color[0] << ", " << (int)color[1] << ", " << (int)color[2] << ")" << std::endl;
+    std::cout << "On change la couleur en rgb(" << (int)color[0] << ", " << (int)color[1] << ", " << (int)color[2] << ")" << std::endl;
     delete[] cstr;
 }
 
@@ -135,7 +135,7 @@ void Printer::visitOperator(const Operator *o) {
 		case SUB: buffer_expr = left - right; break;
 		case MUL: buffer_expr = left * right; break;
 		case DIV: buffer_expr = left / right; break;
-        default: {
+        default: { // N'arrive normalement jamais ici
             std::cerr << "[ERREUR] L'operateur " << o->getSymbol() << " n'existe pas" << std::endl;
             exit(EXIT_FAILURE);
         }
@@ -155,7 +155,7 @@ void Printer::visitPosition(const Position *p) {
 void Printer::visitVar(const Var *v){
     if (vars.find(v->getIdent()) != vars.end()) {
    	    buffer_expr = vars[v->getIdent()];
-        std::cout << "Var " << v->getIdent() << " egal " << buffer_expr << std::endl;
+        std::cout << "Var " << v->getIdent() << " egal a " << buffer_expr << std::endl;
     } else {
         std::cerr << "[ERREUR] La variable " << v->getIdent() << " n'existe pas" << std::endl;
         exit(EXIT_FAILURE);
@@ -166,20 +166,11 @@ void Printer::visitRectangle(const Rectangle *r) {
 	r->getStart()->visit(*this);
     std::pair<double, double> start = bufferPosition;
 	r->getOpposed()->visit(*this);
-	std::pair<double, double> opposed = bufferPosition;	
-       	img.draw_rectangle(start.first, start.second, opposed.first, opposed.second, color);
+	std::pair<double, double> opposed = bufferPosition;
+    is_down = true;
+    img.draw_rectangle(start.first, start.second, opposed.first, opposed.second, color);
 	std::cout << "Rectangle : (" << start.first << ", " << start.second <<") "<<
 		"(" << start.first << ", " << opposed.second <<") " <<
 	 	"(" << opposed.first << ", " << opposed.second <<") " <<
 		"(" << opposed.first << ", " << start.second <<")" << std::endl;
-}
-
-void Printer::visitLine(const Line *l) {
-	l->getStart()->visit(*this);
-	std::pair<double, double> start = bufferPosition;
-	l->getEnd()->visit(*this);
-	std::pair<double, double> end = bufferPosition;
-	img.draw_line(start.first, start.second, end.first, end.second, color);	
-	std::cout << "Ligne entre (" <<start.first << "," << start.second << ") et (" <<
-	       end.first << ", " << end.second << ")" << std::endl;
 }

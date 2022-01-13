@@ -1,8 +1,44 @@
-SRC=code.cc program.cc entete.cc pen.cc printer.cc lex.yy.c parseur.tab.cc main.cc affectation.cc declaration.cc color.cc loop.cc travel.cc operator.cc position.cc value.cc var.cc rectangle.cc line.cc
-SRCH=affectation.hh code.hh entete.hh program.hh color.hh declaration.hh expression.hh instruction.hh loop.hh travel.hh operator.hh parseur.tab.hh pen.hh position.hh printer.hh term.hh value.hh visitor.hh var.hh rectangle.hh line.hh CImg.h
-CXX=g++
+SRC = affectation.cc \
+	code.cc \
+	color.cc \
+	declaration.cc \
+	entete.cc \
+	loop.cc \
+	operator.cc \
+	pen.cc \
+	position.cc \
+	program.cc \
+	rectangle.cc \
+	travel.cc \
+	value.cc \
+	var.cc \
+	printer.cc \
+	lex.yy.c \
+	parseur.tab.cc \
+	main.cc 
+SRCH = affectation.hh \
+	color.hh \
+	code.hh \
+	declaration.hh \
+	entete.hh \
+	expression.hh \
+	instruction.hh \
+	loop.hh \
+	operator.hh \
+	pen.hh \
+	position.hh \
+	program.hh \
+	rectangle.hh \
+	term.hh  \
+	travel.hh \
+	value.hh \
+	var.hh \
+	visitor.hh \
+	printer.hh \
+	parseur.tab.hh
+CXX = g++
 FLAGS =-lX11 -lpthread -ll
-OBJ=$(SRC:.cc=.o)
+OBJ = $(SRC:.cc=.o)
 
 prog: $(OBJ)
 	$(CXX) -o $@ $(OBJ) $(FLAGS)
@@ -13,25 +49,27 @@ lex.yy.c: lexeur.ll parseur.tab.cc
 parseur.tab.cc: parseur.yy
 	bison -d $<
 
-
 graph: graph.dot
-	dot -Tpng $< > $@.png
+	dot -Tpng $< > Arbre_Syntaxique/$@.png
 
 graph.dot: parseur.yy
 	bison --graph=graph.dot parseur.yy
 
 all: prog graph
 
-test: clean prog
-	./prog < test
+cube: prog
+	./prog < Exemple/cube
 
 quadrilatere: prog
-	./prog < quadrilatere
+	./prog < Exemple/quadrilatere
 
 quadrillage: prog
-	./prog < quadrillage
+	./prog < Exemple/quadrillage
+
+test: prog
+	./prog < Exemple/test
 
 .PHONY: clean
 
 clean: 
-	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph graph.dot prog
+	rm -fr $(OBJ) lex.yy.c parseur.tab.cc parseur.tab.hh graph.dot graph prog

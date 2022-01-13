@@ -2,7 +2,7 @@
 Ok ceci est un commentaire
 */
 // baisser;
-var a;
+var a; // commentaire de fin de ligne
 a <- 5;
 baisser;
 lever;
