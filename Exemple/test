@@ -1,6 +1,6 @@
-/*
+/=
 Ok ceci est un commentaire
-*/
+=/
 // baisser;
 var a; // commentaire de fin de ligne
 a <- 5;

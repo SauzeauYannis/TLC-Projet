@@ -36,7 +36,6 @@ SRCH = affectation.hh \
 	visitor.hh \
 	printer.hh \
 	parseur.tab.hh
-CXX = g++
 FLAGS =-lX11 -lpthread -ll
 OBJ = $(SRC:.cc=.o)
 
@@ -59,6 +58,9 @@ all: prog graph
 
 cube: prog
 	./prog < Exemple/cube
+
+erreur: prog
+	./prog < Exemple/erreur
 
 quadrilatere: prog
 	./prog < Exemple/quadrilatere
