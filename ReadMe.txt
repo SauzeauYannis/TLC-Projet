@@ -1,10 +1,20 @@
-Fichier qui contiendra les commentaires sur notre projet et en particulier jusqu'à quel exercice on est allés.
+Projet de TLC
+Yannis Sauzeau
+Loïc Drieu la rochelle
 
-[TODO LIST]
 
-* Transformer l'instruction new Pen(true) en new DownThePen()
-* Transformer l'instruction new Pen(false) en new UpThePen()
-* Rajouter une grammaire avant code qui definit plsrs choses :
-    * Taille de la fenetre
-    * Nom de la fenetre
-    * Si on affiche la fenetre ou pas
+
+Exercice 4 :
+On a décidé de rajouter quelque fonctionnalité à notre grammaire :
+-L'ajout de commentaire en bloc:
+ /* ceci est un commentaire 
+sur plusieur ligne*/
+
+-L'ajout de commentaire ligne // comentaire
+
+-Le fait de pouvoir écrire des nombres flotant, afin d'avoir une meilleur precision dans les dessins
+
+-L'ajout d'un header afin de détailler notre dessin, taille de l'image, nom fichier de sortie, display
+en abscence de header, des valeurs par défault existe, la couleur du background.
+
+
