@@ -55,7 +55,7 @@ void yyerror(const char* s) {
 
 program: header code { 
     Code *c = new Code($1);
-    c->add($2);
+	if ($2 != nullptr) c->add($2);
     fullinstruction =  new Program(c);
 }
 ;

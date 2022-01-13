@@ -1,3 +1,11 @@
-/***/
+/*
+ * Ce fichier sert a montrer les differentes erreurs possibles.
+ * Les erreurs sont commentes pour que le fichier sexecute.
+ * Il suffit de decommenter pour voir les messages derreurs. 
+ */
+
 var a;
-/***/
+
+// 1. Variable deja declare
+// var a;
+
