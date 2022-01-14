@@ -1,2 +1,3 @@
 .vscode
 *.o
+CImg.h
