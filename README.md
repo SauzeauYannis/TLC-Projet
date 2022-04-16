@@ -67,7 +67,7 @@ Vous trouverez une documentation dans le [ReadMe.txt](https://github.com/Sauzeau
 
 ### Résultat
 
-Nous avons obtenu la note de ?/20. (Résultat en mars)
+Nous avons obtenu la note de 17/20.
 
 <a name="en"/>
 
@@ -124,4 +124,4 @@ You can find a documentation in the [ReadMe.txt](https://github.com/SauzeauYanni
 
 ### Result
 
-We obtained a score of ?/20. (Result in March)
+We obtained a score of 17/20.
